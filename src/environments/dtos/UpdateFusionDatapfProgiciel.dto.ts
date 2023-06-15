@@ -1,0 +1,29 @@
+export class UpdateFusionDatapfProgicielDto {
+  class_id: string;
+  progiciel: string
+  environment: string
+  server_vm: string
+  informations: string
+  version_os: string
+  vcpu: string
+  ram: string
+  vdisque: string
+  capacity: string
+  socle: string
+  tag: string
+  url: string
+  server_web_lan: string
+  jenkins_folders_url: string
+  jira_url: string
+  sr_component: string
+  vip_server: string
+  vip_db: string
+  server_web_dmz: string
+  server_db: string
+  lien_applications: string
+  version_db: string
+  version_apache: string
+  language: string
+  language_framework: string
+  framework_2: string
+}
