@@ -1,0 +1,136 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="content">
+                    <ul style="list-style-type: none; padding: 0">
+                        <li class="" style="float: left; margin-right: 3px">
+                            <a class="btn btn-primary" (click)="showTab1()">
+                                Ajouter une nouvelle ligne
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="btn btn-primary" (click)="showTab2()">
+                                Filtrer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="row" id="collapseExample1" *ngIf="show_tab_1">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Ajouter une nouvelle ligne</h4>
+                            <button (click)="closeTab1()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <form (ngSubmit)="saveEnvironment(environment_form.value)" [formGroup]="environment_form">
+                                <div class="row">
+                                    <div class="form-group col-md-4" *ngFor="let data of formData">
+                                    <span *ngIf="data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <select formControlName="{{data.label}}" class="form-control">
+                                          <option [ngValue]="null" disabled>Choisir un environnement</option>
+                                          <option *ngFor="let prf of data.enum" [ngValue]="prf">
+                                           {{ prf }}
+                                          </option>
+                                        </select>
+                                    </span>
+                                        <span *ngIf="!data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <input class="form-control" formControlName="{{data.label}}"
+                                               placeholder="{{data.label}}" type="{{data.type}}" required="true">
+                                    </span>
+                                    </div>
+                                </div>
+
+                                <button *ngIf="formData.length !== 0" [disabled]="environment_form.invalid" class="btn btn-info btn-fill pull-right"
+                                        type="submit">Valider
+                                </button>
+                                <div class="clearfix"></div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="collapseExample2" *ngIf="show_tab_2">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Filtrer</h4>
+                            <button (click)="closeTab2()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <form (ngSubmit)="search(searchObject.value)" [formGroup]="searchObject">
+                                <div class="row">
+                                    <div class="form-group col-md-4" *ngFor="let data of searchFormData">
+                                    <span *ngIf="data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <select formControlName="{{data.label}}" class="form-control">
+                                          <option [ngValue]="null">Choisir un environnement</option>
+                                          <option *ngFor="let prf of data.enum" [ngValue]="prf">
+                                           {{ prf }}
+                                          </option>
+                                        </select>
+                                    </span>
+                                        <span *ngIf="!data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <input class="form-control" formControlName="{{data.label}}"
+                                               placeholder="{{data.label}}" type="{{data.type}}" required="true">
+                                    </span>
+                                    </div>
+                                </div>
+
+                                <button *ngIf="formData.length !== 0"  class="btn btn-info btn-fill pull-right"
+                                        type="submit">Valider
+                                </button>
+                                <button *ngIf="formData.length !== 0" (click)="clearForm()" class="btn btn-white pull-right"
+                                        type="reset">Annuler
+                                </button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Détails <span class="pull-right badge">Date dernière modification : <span *ngIf="transactionData.dataRows.length > 0">{{transactionData.dataRows[transactionData.dataRows.length - 1].createdAt}}</span></span>
+                    </h4>
+                </div>
+                <div class="content">
+                    <div class="text-center content-info" *ngIf="transactionData.dataRows.length === 0">
+                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                    </div>
+                    <div *ngIf="transactionData.dataRows.length !== 0">
+                        <div class="content table-responsive table-full-width" style="overflow-x:scroll;">
+                            <table class="table table-hover table-striped table-bordered table-responsive-sm">
+                                <thead>
+                                <tr>
+                                    <th *ngFor="let cell of transactionData.headerRow">{{ cell }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of transactionData.dataRows">
+                                    <td *ngFor="let cell of row | formatArray : transactionData.headerRow ">
+                                        {{cell}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

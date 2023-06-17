@@ -1,0 +1,29 @@
+.section ul {
+    padding:0;
+    margin:0;
+    list-style-type:none;
+}
+.section li {
+    margin-left:2px;
+    float:left; /*pour IE*/
+}
+.section ul li a {
+    display:block;
+    float:left;
+    width:200px;
+    color:black;
+    text-decoration:none;
+    text-align:center;
+    padding:5px;
+    border:2px solid;
+    /*pour avoir un effet "outset" avec IE :*/
+    border-color:#DCDCDC #696969 #696969 #DCDCDC;
+}
+.section ul li a:hover, a:active {
+    background-color:#D3D3D3;
+    border-color:#696969 #DCDCDC #DCDCDC #696969;
+}
+.section ul li a:active {
+    background-color:#D3D3D3;
+    border-color:#696969 #DCDCDC #DCDCDC #696969;
+}

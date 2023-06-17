@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+
+.modal-backdrop.fade {
+    opacity: 0.5;
+}
+.modal-open .modal {
+    opacity: 1;
+    display: flex !important;
+    align-items: center !important;
+}

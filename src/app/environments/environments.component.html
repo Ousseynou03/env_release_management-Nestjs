@@ -1,0 +1,377 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row section">
+            <div class="card">
+                <div class="content">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class=" nav-link active" (click)="showSection1()">
+                                Liste des environnements
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" nav-link" (click)="showSection2()">
+                                Planning
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" nav-link" (click)="showSection3()">
+                                Indisponibilités
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="content">
+                <div class="row" id="collapseExample1" *ngIf="show_section_1">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Listes des environnements </h4>
+                            </div>
+                            <div class="content">
+                                <div class="text-center content-info" *ngIf="environmentsData.dataRows.length === 0">
+                                    <h3 class="pe-7s-info"> AUCUN ENVIRONNEMENT À AFFICHER ! </h3>
+                                </div>
+                                <div *ngIf="environmentsData.dataRows.length !== 0">
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th *ngFor="let cell of environmentsData.headerRow">{{ cell }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let row of environmentsData.dataRows">
+                                                <td>
+                                                    {{row.title}}
+                                                </td>
+                                                <td>
+                                                    <a href="#" [routerLink]="['/environmentDetail', row.id]"
+                                                       class="btn-link">
+                                                        Détails
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="collapseExample2" *ngIf="show_section_2">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="card">
+                                <div class="content">
+                                    <ul style="list-style-type: none; padding: 0">
+                                        <li class="" style="float: left; margin-right: 3px">
+                                            <a class="btn btn-primary" (click)="showTab3()">
+                                                Ajouter une nouvelle ligne
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="btn btn-primary" (click)="showTab4()">
+                                                Filtrer
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="row" id="collapseExample6" *ngIf="show_tab_3">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title">Planifier</h4>
+                                            <button (click)="closeTab3()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <igx-date-range-picker style="margin-top: 30px" #rangePicker [mode]="'dialog'" [(ngModel)]="range"
+                                                                           inputFormat="dd/MM/yyyy"
+                                                                           [overlaySettings]="overlaySettings">
+                                                        <ng-template igxPickerActions>
+                                                            <div id="actions-add">
+                                                                <button igxButton (click)="selectDays(7)">Last 7 days</button>
+                                                                <button igxButton (click)="selectDays(28)">Last 28 days</button>
+                                                                <button igxButton (click)="selectDays(90)">Last 90 days</button>
+                                                                <button igxButton (click)="rangePicker.close()">Done</button>
+                                                            </div>
+                                                        </ng-template>
+                                                    </igx-date-range-picker>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Titre</label>
+                                                    <input class="form-control" [(ngModel)]="activity_desc"
+                                                           placeholder="Titre" type="text" required="true">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button [disabled]="activity_form_valid()" (click)="saveActivity()" class="btn btn-info btn-fill pull-left" >Valider
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="collapseExample7" *ngIf="show_tab_4">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title">Filtrer</h4>
+                                            <button (click)="closeTab4()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <igx-date-range-picker #rangePickerSearch [mode]="'dialog'" [(ngModel)]="rangeSearch"
+                                                                           inputFormat="dd/MM/yyyy"
+                                                                           [overlaySettings]="overlaySettings">
+                                                        <ng-template igxPickerActions>
+                                                            <div id="actions-search">
+                                                                <button igxButton (click)="selectDays(7)">Last 7 days</button>
+                                                                <button igxButton (click)="selectDays(28)">Last 28 days</button>
+                                                                <button igxButton (click)="selectDays(90)">Last 90 days</button>
+                                                                <button igxButton (click)="rangePickerSearch.close()">Done</button>
+                                                            </div>
+                                                        </ng-template>
+                                                    </igx-date-range-picker>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button (click)="clearRangePicker()" class="btn btn-white pull-left"
+                                                            type="reset">Annuler
+                                                    </button>
+                                                    <button (click)="searchActivity()" class="btn btn-info btn-fill pull-left" >Valider
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="text-center content-info" *ngIf="transactionData.dataRows.length === 0">
+                                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                                    </div>
+                                    <div *ngIf="transactionData.dataRows.length !== 0">
+                                        <div class="header">
+                                            <h4 class="title">Détails </h4>
+                                        </div>
+                                        <div class="content table-responsive table-full-width" style="overflow-x:scroll;">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th *ngFor="let cell of transactionData.headerRow">{{ cell }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let row of transactionData.dataRows">
+                                                    <td>
+                                                        [
+                                                        <span *ngFor="let cell of row | match_value ">
+                                            {{cell   | date: 'dd/MM/yyyy' }}
+                                        </span>
+                                                        ]
+                                                    </td>
+                                                    <td>
+                                        <span>
+                                            {{row.description}}
+                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <button (click)="deleteActivity(row.id)" class="btn-link">
+                                                            Supprimer
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="collapseExample3" *ngIf="show_section_3">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="card">
+                                <div class="content">
+                                    <ul style="list-style-type: none; padding: 0">
+                                        <li class="" style="float: left; margin-right: 3px">
+                                            <a class="btn btn-primary" (click)="showTab1()">
+                                                Ajouter une nouvelle ligne
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="btn btn-primary" (click)="showTab2()">
+                                                Filtrer
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="row" id="collapseTabExample1" *ngIf="show_tab_1">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title">Ajouter une nouvelle ligne</h4>
+                                            <button (click)="closeTab1()"
+                                                    class="btn-link pe-7s-close-circle pull-right">Close
+                                            </button>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <form (ngSubmit)="saveInd(ind_form.value)" [formGroup]="ind_form">
+                                                <div class="row">
+                                                    <div class="form-group col-md-4" *ngFor="let data of formData">
+                                    <span *ngIf="data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <select formControlName="{{data.label}}" class="form-control">
+                                          <option [ngValue]="null" disabled>Choisir un environnement</option>
+                                          <option *ngFor="let prf of data.enum" [ngValue]="prf">
+                                           {{ prf }}
+                                          </option>
+                                        </select>
+                                    </span>
+                                                        <span *ngIf="!data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <input class="form-control" formControlName="{{data.label}}"
+                                               placeholder="{{data.label}}" type="{{data.type}}" required="true">
+                                    </span>
+                                                    </div>
+                                                </div>
+
+                                                <button *ngIf="formData.length !== 0" [disabled]="ind_form.invalid"
+                                                        class="btn btn-info btn-fill pull-right"
+                                                        type="submit">Valider
+                                                </button>
+                                                <div class="clearfix"></div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="collapseTabExample2" *ngIf="show_tab_2">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title">Filtrer</h4>
+                                            <button (click)="closeTab2()"
+                                                    class="btn-link pe-7s-close-circle pull-right">Close
+                                            </button>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <form (ngSubmit)="search(searchObject.value)" [formGroup]="searchObject">
+                                                <div class="row">
+                                                    <div class="form-group col-md-4"
+                                                         *ngFor="let data of searchFormData">
+                                    <span *ngIf="data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <select formControlName="{{data.label}}" class="form-control">
+                                          <option [ngValue]="null">Choisir un environnement</option>
+                                          <option *ngFor="let prf of data.enum" [ngValue]="prf">
+                                           {{ prf }}
+                                          </option>
+                                        </select>
+                                    </span>
+                                                        <span *ngIf="!data.isEnum">
+                                        <label>{{data.label}} </label>
+                                        <input class="form-control" formControlName="{{data.label}}"
+                                               placeholder="{{data.label}}" type="{{data.type}}" required="true">
+                                    </span>
+                                                    </div>
+                                                </div>
+
+                                                <button *ngIf="formData.length !== 0"
+                                                        class="btn btn-info btn-fill pull-right"
+                                                        type="submit">Valider
+                                                </button>
+                                                <button *ngIf="formData.length !== 0" (click)="clearForm()"
+                                                        class="btn btn-white pull-right"
+                                                        type="reset">Annuler
+                                                </button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card">
+<!--
+                                <div class="header">
+                                    <h4 class="title">Détails <span class="pull-right badge">Date dernière modification : <span
+                                            *ngIf="indsData.dataRows.length > 0">{{indsData.dataRows[indsData.dataRows.length - 1].date_creation}}</span></span>
+                                    </h4>
+                                </div>
+-->
+                                <div class="content">
+                                    <div class="text-center content-info" *ngIf="indsData.dataRows.length === 0">
+                                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                                    </div>
+                                    <div *ngIf="indsData.dataRows.length !== 0">
+                                        <div class="header">
+                                            <h4 class="title">Détails </h4>
+                                        </div>
+                                        <div class="content table-responsive table-full-width"
+                                             style="overflow-x:scroll;">
+                                            <table class="table table-hover table-striped table-bordered table-responsive-sm">
+                                                <thead>
+                                                <tr>
+                                                    <th *ngFor="let cell of indsData.headerRow">{{ cell }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let row of indsData.dataRows">
+                                                    <td *ngFor="let cell of row | formatArray : indsData.headerRow ">
+                                                        {{cell}}
+                                                    </td>
+                                                    <td>
+                                                        <button (click)="deleteInd(row.id)" class="btn-link">
+                                                            Supprimer
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

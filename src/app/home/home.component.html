@@ -1,0 +1,66 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-sm-3" *ngFor="let menuItem of menuItems">
+                <div class="a-box">
+                    <div class="img-container">
+                        <i id="icon-list" class="{{menuItem.icon}}"></i>
+                    </div>
+                    <div class="text-container">
+                        <h2>{{menuItem.title}}</h2>
+                        <div>
+                            <a [routerLink]="[menuItem.path]">
+                                Voir plus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 50px">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Plannings de la semaine :  [ {{this.startOfWeek(today) | date: 'dd/MM/yyyy' }} -  {{this.endOfWeek(today) | date: 'dd/MM/yyyy' }} ] </h4>
+                </div>
+                <div class="content">
+                    <div class="text-center content-info" *ngIf="transactionData.dataRows.length === 0">
+                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                    </div>
+                    <div *ngIf="transactionData.dataRows.length !== 0">
+                        <div class="content table-responsive table-full-width" style="overflow-x:scroll;">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th *ngFor="let cell of transactionData.headerRow">{{ cell }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of transactionData.dataRows">
+                                    <td>
+                                        [
+                                        <span *ngFor="let cell of row | match_value ">
+                                            {{cell   | date: 'dd/MM/yyyy' }}
+                                        </span>
+                                        ]
+                                    </td>
+                                    <td>
+                                        <span>
+                                            {{row.planning_name}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="#" [routerLink]="['/planningDetail', row.id]" class="btn-link">
+                                            Détails
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

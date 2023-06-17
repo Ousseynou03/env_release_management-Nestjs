@@ -1,0 +1,31 @@
+igx-calendar-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 10px;
+}
+#actions-add {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 10px;
+}
+#actions-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 10px;
+}
+
+#actions button {
+  margin: 6px 0;
+}
+
+#actions button:last-of-type {
+  margin: 24px 0 18px 0;
+}

@@ -1,0 +1,306 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="content">
+                    <ul style="list-style-type: none; padding: 0">
+                        <li class="" style="float: left; margin-right: 3px">
+                            <a class="btn btn-primary" (click)="showTab1()">
+                                Ajouter une nouvelle tâche
+                            </a>
+                        </li>
+                        <li class="" style="float: left; margin-right: 3px">
+                            <a class="btn btn-primary" (click)="showTab2()">
+                                Filtrer
+                            </a>
+                        </li>
+                        <li class="">
+                            <a [routerLink]="['/plannings']" class="btn btn-primary">
+                                Retour
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="row" id="collapseExample1" *ngIf="show_tab_1">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Ajouter une nouvelle tâche</h4>
+                            <button (click)="closeTab1()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <form (ngSubmit)="saveTask(task_form.value)" id="task_form" [formGroup]="task_form">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>Titre</label>
+                                        <input class="form-control" formControlName="title"
+                                               placeholder="Titre" type="text" required="true">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Description</label>
+                                        <textarea class="form-control" formControlName="description" cols="30" rows="4"
+                                               placeholder="Description" required="true"></textarea>
+                                    </div>
+                                </div>
+
+                                <button [disabled]="task_form.invalid" class="btn btn-info btn-fill pull-right"
+                                        type="submit">Valider
+                                </button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="collapseExample2" *ngIf="show_tab_2">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Filtrer</h4>
+                            <button (click)="closeTab2()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <form (ngSubmit)="search(searchObject.value)" id="task_form_search" [formGroup]="searchObject">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>Titre</label>
+                                        <input class="form-control" formControlName="title"
+                                               placeholder="Titre" type="text" required="true">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Status</label>
+                                        <select class="form-control" formControlName="status">
+                                            <option [ngValue]="null">Choisir un status</option>
+                                            <option *ngFor="let prf of STATUS" [ngValue]="prf">
+                                                {{ prf }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button  class="btn btn-info btn-fill pull-right"
+                                         type="submit">Valider
+                                </button>
+                                <button (click)="clearForm()" class="btn btn-white pull-right"
+                                        type="reset">Annuler
+                                </button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Planning : [ {{planning.start_date | date: 'dd/MM/yyyy' }} -  {{planning.end_date | date: 'dd/MM/yyyy' }} ] /  {{planning.planning_name}} </h4>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="header">
+                    <h5 class="subtitle">
+                        Tâche(s) en cours
+                    </h5>
+                </div>
+                <div class="content">
+                    <div class="text-center content-info" *ngIf="transactionData.dataRows.length === 0">
+                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                    </div>
+                    <div *ngIf="transactionData.dataRows.length !== 0">
+                        <div class="content table-responsive table-full-width" style="overflow-x:scroll;">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th *ngFor="let cell of transactionData.headerRow">{{ cell }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of transactionData.dataRows | match_value | execution ">
+                                    <td>
+                                        {{row.title}}
+                                    </td>
+                                    <td>
+                                        {{row.status}}
+                                    </td>
+                                    <td>
+                                        <button (click)="openModal(row)" class="btn-link">
+                                            détails
+                                        </button>
+                                        -
+                                        <button (click)="openModal(row, false)" class="btn-link">
+                                            Modifier
+                                        </button>
+                                        -
+                                        <button (click)="deleteTask(row.id)" class="btn-link">
+                                            Supprimer
+                                        </button>
+                                    </td>
+                                    <app-modal #modal id="show{{row.id}}" [modalConfig]="modalConfig">
+                                        <div class="card">
+                                            <span>
+                                                Titre : <br>
+                                                <span class="card-section">
+                                                    {{row.title}}
+                                                </span>
+                                            </span>
+                                            <br>
+                                            <hr>
+                                            <span>
+                                                Status : <br>
+                                                {{row.status}}
+                                            </span>
+                                            <br>
+                                            <hr>
+                                            <span>
+                                                Description : <br>
+                                                {{row.description}}
+                                            </span>
+                                        </div>
+                                    </app-modal>
+                                    <app-modal #modal id="update{{row.id}}" [modalConfig]="modalConfig">
+                                        <form (ngSubmit)="saveTask(task_update_form.value)" id="task_form{{row.id}}" [formGroup]="task_update_form">
+                                            <div class="form-group col-md-12">
+                                                <label>Titre</label>
+                                                <input class="form-control" formControlName="title"
+                                                       placeholder="Titre" type="text" required="true">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Status</label>
+                                                <select class="form-control" formControlName="status">
+                                                    <option [ngValue]="null">Choisir un status</option>
+                                                    <option *ngFor="let prf of STATUS" [ngValue]="prf">
+                                                        {{ prf }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Description</label>
+                                                <textarea class="form-control" formControlName="description" cols="30" rows="4"
+                                                          placeholder="Description" type="text" required="true"></textarea>
+                                            </div>
+
+                                            <button [disabled]="task_update_form.invalid" class="btn btn-info btn-fill pull-right"
+                                                    type="submit">Valider
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </app-modal>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="header">
+                    <h5 class="subtitle">
+                        Toutes les tâches
+                    </h5>
+                </div>
+                <div class="content">
+                    <div class="text-center content-info" *ngIf="transactionData.dataRows.length === 0">
+                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                    </div>
+                    <div *ngIf="transactionData.dataRows.length !== 0">
+                        <div class="content table-responsive table-full-width" style="overflow-x:scroll;">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th *ngFor="let cell of transactionData.headerRow">{{ cell }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of transactionData.dataRows | match_value ">
+                                    <td>
+                                        {{row.title}}
+                                    </td>
+                                    <td>
+                                        {{row.status}}
+                                    </td>
+                                    <td>
+                                        <button (click)="openModal(row)" class="btn-link">
+                                            détails
+                                        </button>
+                                        -
+                                        <button (click)="openModal(row, false)" class="btn-link">
+                                            Modifier
+                                        </button>
+                                        -
+                                        <button (click)="deleteTask(row.id)" class="btn-link">
+                                            Supprimer
+                                        </button>
+                                    </td>
+                                    <app-modal #modal id="show{{row.id}}" [modalConfig]="modalConfig">
+                                        <div class="card">
+                                            <span>
+                                                Titre : <br>
+                                                <span class="card-section">
+                                                    {{row.title}}
+                                                </span>
+                                            </span>
+                                            <br>
+                                            <hr>
+                                            <span>
+                                                Status : <br>
+                                                {{row.status}}
+                                            </span>
+                                            <br>
+                                            <hr>
+                                            <span>
+                                                Description : <br>
+                                                {{row.description}}
+                                            </span>
+                                        </div>
+                                    </app-modal>
+                                    <app-modal #modal id="update{{row.id}}" [modalConfig]="modalConfig">
+                                        <form (ngSubmit)="saveTask(task_update_form.value)" id="task_form{{row.id}}" [formGroup]="task_update_form">
+                                            <div class="form-group col-md-12">
+                                                <label>Titre</label>
+                                                <input class="form-control" formControlName="title"
+                                                       placeholder="Titre" type="text" required="true">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Status</label>
+                                                <select class="form-control" formControlName="status">
+                                                    <option [ngValue]="null">Choisir un status</option>
+                                                    <option *ngFor="let prf of STATUS" [ngValue]="prf">
+                                                        {{ prf }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Description</label>
+                                                <textarea class="form-control" formControlName="description" cols="30" rows="4"
+                                                          placeholder="Description" type="text" required="true"></textarea>
+                                            </div>
+
+                                            <button [disabled]="task_update_form.invalid" class="btn btn-info btn-fill pull-right"
+                                                    type="submit">Valider
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </app-modal>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

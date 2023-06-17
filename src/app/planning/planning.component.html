@@ -1,0 +1,155 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="content">
+                    <ul style="list-style-type: none; padding: 0">
+                        <li class="" style="float: left; margin-right: 3px">
+                            <a class="btn btn-primary" (click)="showTab1()">
+                                Ajouter une nouvelle ligne
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="btn btn-primary" (click)="showTab2()">
+                                Filtrer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="row" id="collapseExample1" *ngIf="show_tab_1">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Planifier</h4>
+                            <button (click)="closeTab1()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <igx-date-range-picker style="margin-top: 30px" #rangePicker [mode]="'dialog'" [(ngModel)]="range"
+                                                           inputFormat="dd/MM/yyyy"
+                                                           [overlaySettings]="overlaySettings">
+                                        <ng-template igxPickerActions>
+                                            <div id="actions-add">
+                                                <button igxButton (click)="selectDays(7)">Last 7 days</button>
+                                                <button igxButton (click)="selectDays(28)">Last 28 days</button>
+                                                <button igxButton (click)="selectDays(90)">Last 90 days</button>
+                                                <button igxButton (click)="rangePicker.close()">Done</button>
+                                            </div>
+                                        </ng-template>
+                                    </igx-date-range-picker>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Titre</label>
+                                    <input class="form-control" [(ngModel)]="planning_name"
+                                           placeholder="Titre" type="text" required="true">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button [disabled]="planning_form_valid()" (click)="savePlanning()" class="btn btn-info btn-fill pull-left" >Valider
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="collapseExample2" *ngIf="show_tab_2">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Filtrer</h4>
+                            <button (click)="closeTab2()" class="btn-link pe-7s-close-circle pull-right">Close</button>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <igx-date-range-picker #rangePickerSearch [mode]="'dialog'" [(ngModel)]="rangeSearch"
+                                                           inputFormat="dd/MM/yyyy"
+                                                           [overlaySettings]="overlaySettings">
+                                        <ng-template igxPickerActions>
+                                            <div id="actions-search">
+                                                <button igxButton (click)="selectDays(7)">Last 7 days</button>
+                                                <button igxButton (click)="selectDays(28)">Last 28 days</button>
+                                                <button igxButton (click)="selectDays(90)">Last 90 days</button>
+                                                <button igxButton (click)="rangePickerSearch.close()">Done</button>
+                                            </div>
+                                        </ng-template>
+                                    </igx-date-range-picker>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button (click)="clearForm()" class="btn btn-white pull-left"
+                                            type="reset">Annuler
+                                    </button>
+                                    <button (click)="searchPlanning()" class="btn btn-info btn-fill pull-left" >Valider
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Détails </h4>
+                </div>
+                <div class="content">
+                    <div class="text-center content-info" *ngIf="transactionData.dataRows.length === 0">
+                        <h3 class="pe-7s-info">Rien À AFFICHER ! </h3>
+                    </div>
+                    <div *ngIf="transactionData.dataRows.length !== 0">
+                        <div class="content table-responsive table-full-width" style="overflow-x:scroll;">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th *ngFor="let cell of transactionData.headerRow">{{ cell }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of transactionData.dataRows">
+                                    <td>
+                                        [
+                                        <span *ngFor="let cell of row | match_value ">
+                                            {{cell   | date: 'dd/MM/yyyy' }}
+                                        </span>
+                                        ]
+                                    </td>
+                                    <td>
+                                        <span>
+                                            {{row.planning_name}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="#" [routerLink]="['/planningDetail', row.id]" class="btn-link">
+                                            Détails
+                                        </a>
+                                        -
+                                        <button (click)="deletePlanning(row.id)" class="btn-link">
+                                            Supprimer
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
