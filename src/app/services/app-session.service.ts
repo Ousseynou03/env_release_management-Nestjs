@@ -180,4 +180,28 @@ export class AppSessionService extends BaseService {
     return (JSON.parse(localStorage.getItem('profile')));
   }
 
+  //Testing Manage
+
+  postTesteur(data : any){
+    return this._http.post<any>("http://localhost:3000/testeurManager", data);
+  }
+
+
+
+  getTesteur(id:number){
+    return this.getRequest("http://localhost:3000/testeurManager/"+id);
+  }
+
+  getAllTesteur(){
+    return this.getRequest("http://localhost:3000/testeurManager");
+  }
+
+  putTesteur(data : any, id : number){
+    return this._http.put<any>("http://localhost:3000/testeurManager/"+id, data);
+  }
+
+  deleteTesteur(id : number){
+    return this._http.delete<any>("http://localhost:3000/testeurManager/"+id);
+  }
+
 }

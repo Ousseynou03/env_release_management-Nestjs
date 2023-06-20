@@ -13,7 +13,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/environments', title: 'Environnements',  icon: 'pe-7s-science', class: 'Utilisateur' },
     { path: '/releases', title: 'Releases',  icon: 'pe-7s-note2', class: 'Utilisateur' },
     { path: '/plannings', title: 'Plannings',  icon: 'pe-7s-clock', class: 'Utilisateur' },
-    { path: '/roadmaps', title: 'Roadmaps',  icon: 'pe-7s-map', class: 'Utilisateur' }
+    { path: '/roadmaps', title: 'Roadmaps',  icon: 'pe-7s-map', class: 'Utilisateur' },
+    { path: '/testeur', title: 'Testeur',  icon: 'pe-7s-user', class: 'Utilisateur' },
+    { path: '/perimetre', title: 'Périmétre',  icon: 'pe-7s-info', class: 'Utilisateur' },
 ];
 
 @Component({
