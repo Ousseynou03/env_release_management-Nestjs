@@ -204,4 +204,145 @@ export class AppSessionService extends BaseService {
     return this._http.delete<any>("http://localhost:3000/testeurManager/"+id);
   }
 
+
+  //Release Manage
+
+
+  postRelease(data : any){
+    return this._http.post<any>("http://localhost:3000/releaseManager", data);
+  }
+
+  getAllRelease(){
+    return this._http.get<any>("http://localhost:3000/releaseManager");
+  }
+
+  putRelease(data : any, id : number){
+    return this._http.put<any>("http://localhost:3000/releaseManager/"+id, data);
+  }
+
+  getRelease(id : number){
+    return this._http.get<any>("http://localhost:3000/releaseManager/"+id);
+  }
+
+  deleteRelease(id : number){
+    return this._http.delete<any>("http://localhost:3000/releaseManager/"+id);
+  }
+
+  identifiantRelease(){
+    return localStorage.getItem('id');
+  }
+
+  //Anomalie Manage
+
+  postAnomalie(data : any){
+    return this._http.post<any>("http://localhost:3000/anomalieManager", data);
+  }
+
+  getAllAnomalie(){
+    return this._http.get<any>("http://localhost:3000/anomalieManager");
+  }
+
+  putAnomalie(data : any, id : number){
+    return this._http.put<any>("http://localhost:3000/anomalieManager/"+id, data);
+  }
+
+  getAnomalie(id : number){
+    return this._http.get<any>("http://localhost:3000/anomalieManager/"+id);
+  }
+
+  deleteAnomalie(id : number){
+    return this._http.delete<any>("http://localhost:3000/anomalieManager/"+id);
+  }
+
+  //Ticket Manage
+
+  postTicket(data : any){
+    return this._http.post<any>("http://localhost:3000/ticketManager", data);
+  }
+
+  getAllTicket(){
+    return this._http.get<any>("http://localhost:3000/ticketManager");
+  }
+
+  getVisionTicket(id: number){
+    return this._http.get<any>("http://localhost:3000/ticketManager/visionsTicket/"+id);
+  }
+
+  getVisionBloquante(id: number){
+    return this._http.get<any>("http://localhost:3000/ticketManager/visionsBloquante/"+id);
+  }
+
+  getVisionMajeuret(id: number){
+    return this._http.get<any>("http://localhost:3000/ticketManager/visionsMajeure/"+id);
+  }
+
+  getVisionMineure(id: number){
+    return this._http.get<any>("http://localhost:3000/ticketManager/visionsMineure/"+id);
+  }
+
+  getAllTicketForRelease(id:number){
+    return this._http.get<any>("http://localhost:3000/ticketManager/ticketRelease/"+id);
+  }
+
+  getTicket(id:number){
+    return this._http.get<any>("http://localhost:3000/ticketManager/"+id);
+  }
+
+  putTicket(data : any, id : number){
+    return this._http.put<any>("http://localhost:3000/ticketManager/"+id, data);
+  }
+
+  deleteTicket(id : number){
+    return this._http.delete<any>("http://localhost:3000/ticketManager/"+id);
+  }
+
+
+  //Cas De Test Manage
+
+  postCasTest(data : any){
+    return this._http.post<any>("http://localhost:3000/casTestManager", data);
+  }
+
+  getAllCasTest(){
+    return this._http.get<any>("http://localhost:3000/casTestManager");
+  }
+
+  getCasTest(id : number){
+    return this._http.get<any>("http://localhost:3000/casTestManager/"+id);
+  }
+
+  putCasTest(data : any, id : number){
+    return this._http.put<any>("http://localhost:3000/casTestManager/"+id, data);
+  }
+
+  deleteCasTest(id : number){
+    return this._http.delete<any>("http://localhost:3000/casTestManager/"+id);
+  }
+
+  getVisionCasTest(id: number){
+    return this._http.get<any>("http://localhost:3000/casTestManager/visionCasTest/"+id);
+  }
+
+
+  //Scenario de test Manage
+
+  postScenario(data : any){
+    return this._http.post<any>("http://localhost:3000/scenarioManager", data);
+  }
+
+  getAllScenario(){
+    return this._http.get<any>("http://localhost:3000/scenarioManager");
+  }
+
+  getAllScenarioForCasTest(id: number){
+    return this._http.get<any>("http://localhost:3000/scenarioManager/casTest/"+id);
+  }
+
+  putScenario(data : any, id : number){
+    return this._http.put<any>("http://localhost:3000/scenarioManager/"+id, data);
+  }
+
+  deleteScenario(id : number){
+    return this._http.delete<any>("http://localhost:3000/scenarioManager/"+id);
+  }
 }

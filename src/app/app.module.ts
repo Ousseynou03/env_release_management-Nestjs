@@ -35,6 +35,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { PerimetreComponent } from './perimetre/perimetre.component';
+import { DetailReleaseComponent } from './perimetre/detail/detail-release/detail-release.component';
+import { DialogEditComponent } from './perimetre/dialog/dialog-edit/dialog-edit.component';
+import { PerimetreDialogComponent } from './perimetre/dialog/perimetre-dialog/perimetre-dialog.component';
 
 @NgModule({
     imports: [
@@ -71,7 +75,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         AdminLayoutComponent,
         AuthentificationComponent,
         TesteurComponent,
-        DialogComponent
+        DialogComponent,
+        PerimetreComponent,
+        DetailReleaseComponent,
+        DialogEditComponent,
+        PerimetreDialogComponent
     ],
     providers: [SessionService, AppSessionService, AuthGuardService, GestionnaireGuardService, UserGuardService, AdminGuardService,
         {
