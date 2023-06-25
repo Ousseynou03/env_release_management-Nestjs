@@ -86,7 +86,7 @@ export class DetailReleaseComponent implements OnInit {
       });
     }
   
-      ajoutDialogTicket(id: number){ 
+    ajoutDialogTicket(id: number){ 
     this.dialog.open(TicketDialogComponent,{
       data:{id},
       width: '50%',

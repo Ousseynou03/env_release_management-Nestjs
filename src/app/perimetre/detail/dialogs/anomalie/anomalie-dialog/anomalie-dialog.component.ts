@@ -41,6 +41,7 @@ export class AnomalieDialogComponent implements OnInit {
   });
 
   listTicket!: ITicket[] ;
+  currentStepIndex = 0;
 
   constructor(private app_service: AppSessionService,
     private _formBuilder: FormBuilder,
@@ -53,6 +54,22 @@ export class AnomalieDialogComponent implements OnInit {
     .subscribe(response =>{
       this.listTicket = response;
     })
+  }
+
+  prevStep() {
+    this.currentStepIndex--;
+  }
+
+  nextStep() {
+    if (this.currentStepIndex < this.totalSteps() - 1) {
+      this.currentStepIndex++;
+    } else {
+      this.addAnomalie();
+    }
+  }
+
+  totalSteps() {
+    return 1; // Mettez le nombre total d'étapes ici
   }
 
   addAnomalie(){

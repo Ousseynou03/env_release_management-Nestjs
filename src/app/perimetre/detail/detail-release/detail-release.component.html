@@ -1,1 +1,135 @@
-<p>detail-release works!</p>
+<div class="container-fluide page">
+    <div class="page_box p-3 mt-2">Détail Release {{ info }}</div>
+    <div class="page_content shadow p-3 position-relative">
+
+      <mat-toolbar style="background-color: white;">
+        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" [routerLink]="['' ,id, info, 'dashboard']">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+        <span class="example-spacer"></span>
+        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogTicket(id)">
+          <mat-icon>add</mat-icon>
+          Ticket
+        </button>
+        <span class="example-spacer"></span>
+        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogaCasTest(id)">
+          <mat-icon>add</mat-icon>
+          Cas De Test
+        </button>
+        <span class="example-spacer"></span>
+        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogAnomalie(id)">
+          <mat-icon>add</mat-icon>
+          Anomalie
+        </button>
+        
+        <span class="example-spacer"></span>
+        <!-- <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" routerLink="/managerTesting">
+          <mat-icon>add</mat-icon>
+          Scénario De Test
+        </button>
+          <span class="example-spacer"></span> -->
+      </mat-toolbar>
+
+        <div class="container">
+            <div class="mt-2">
+                <mat-form-field>
+                    <mat-label>Rechercher</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                  </mat-form-field>
+                  
+                  <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSourceTicket" matSortTicket>
+
+                      <!-- Matricule Column -->
+                      <ng-container matColumnDef="titre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: limegreen;"> Titre </th>
+                        <td mat-cell *matCellDef="let row"> {{row.titre}} </td>
+                      </ng-container>
+                      
+
+                      <!-- Matricule Column -->
+                      <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: limegreen;"> Type </th>
+                        <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+                      </ng-container>
+                  
+                      <!-- Nom Column -->
+                      <ng-container matColumnDef="testeur">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Prise en Chage </th>
+                        <td mat-cell *matCellDef="let row"> {{row.testeur?.prenom}} {{row.testeur?.nom}} </td>
+                      </ng-container>
+
+                       <!-- Nom Column -->
+                       <ng-container matColumnDef="casTest">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color:bisque;"> Resultat </th>
+                        <td mat-cell *matCellDef="let row">{{row?.casDeTest?.resultat}} </td>
+                      </ng-container>
+
+                       <!-- Nom Column -->
+                       <ng-container matColumnDef="scenario">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color:bisque;"> Scénario Test </th>
+                        <td mat-cell *matCellDef="let row">
+                          <button mat-icon-button [routerLink]="['' , row?.casDeTest?.refCasTest, row?.casDeTest?.resultat, 'detailCasTest']">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="cloture">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> Cloturée </th>
+                        <td mat-cell *matCellDef="let row"> {{row.anomalies?.cloturee}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="criticite">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> Criticité </th>
+                        <td mat-cell *matCellDef="let row">{{row.anomalies?.criticite}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="cours">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> En Cours </th>
+                        <td mat-cell *matCellDef="let row">{{row.anomalies?.enCours}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="priorite">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> Priorité </th>
+                        <td mat-cell *matCellDef="let row">{{row.anomalies?.priorite}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="statut">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> Statut </th>
+                        <td mat-cell *matCellDef="let row">{{row.anomalies?.statut}}</td>
+                      </ng-container>
+
+                       <!-- Action Column -->
+                       <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Action </th>
+                        <td mat-cell *matCellDef="let row">
+
+                          <button mat-icon-button color="primary" (click)="editDialogTicket(row, row.release.refRelease, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
+                              <mat-icon>edit</mat-icon>
+                          </button>
+
+                          <button mat-icon-button color="warn"  (click)="deleteTicket(row.refTicket, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+
+                        </td>
+
+                      </ng-container>
+                  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsTicket"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsTicket;"></tr>
+                  
+                      <!-- Row shown when there is no matching data. -->
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                      </tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" ></mat-paginator>
+                  </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,51 @@
+.page{
+    color: white;
+    padding: 0 1rem;
+    background: #f1f5f9;
+    &_box{
+        min-height: 120px;
+        background: #105498;;
+        margin: 0 -1rem;
+        font-size: 36px;
+    }
+    &_content{
+        min-height: calc(100vh - 178px);
+        border-radius: 10px;
+        margin-top: -2rem;
+        background: white;
+        color: black;
+        font-size: 2rem;
+        &-data{
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.pageStepper{
+    background: #f1f1f3;
+}
+
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+table {
+    width: 100%;
+}
+  
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+td, th {
+    width: 15%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}

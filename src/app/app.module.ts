@@ -49,6 +49,7 @@ import { ManagerDialogComponent } from './perimetre/detail/dialogs/manager/manag
 import { DetailScenarioDialogComponent } from './perimetre/detail/dialogs/scenario-test/detail-scenario/detail-scenario-dialog/detail-scenario-dialog.component';
 import { ScenarioTestDialogComponent } from './perimetre/detail/dialogs/scenario-test/detail-scenario/scenario-test-dialog/scenario-test-dialog.component';
 import { TicketDialogComponent } from './perimetre/detail/dialogs/ticket/ticket-dialog/ticket-dialog.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
 
 @NgModule({
     imports: [
@@ -100,7 +101,8 @@ import { TicketDialogComponent } from './perimetre/detail/dialogs/ticket/ticket-
         ManagerDialogComponent,
         DetailScenarioDialogComponent,
         ScenarioTestDialogComponent,
-        TicketDialogComponent
+        TicketDialogComponent,
+        DashbordComponent
     ],
     providers: [SessionService, AppSessionService, AuthGuardService, GestionnaireGuardService, UserGuardService, AdminGuardService,
         {
