@@ -20,6 +20,7 @@ import {GestionnaireGuardService} from './guards/is_gestionnaire';
 import {UserGuardService} from './guards/is_user';
 import {AdminGuardService} from './guards/is_admin';
 import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {ModalComponent} from './modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
@@ -29,8 +30,10 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSelectModule} from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
@@ -39,6 +42,7 @@ import { PerimetreComponent } from './perimetre/perimetre.component';
 import { DetailReleaseComponent } from './perimetre/detail/detail-release/detail-release.component';
 import { DialogEditComponent } from './perimetre/dialog/dialog-edit/dialog-edit.component';
 import { PerimetreDialogComponent } from './perimetre/dialog/perimetre-dialog/perimetre-dialog.component';
+import { ManagerComponent } from './manager/manager.component';
 
 @NgModule({
     imports: [
@@ -68,6 +72,10 @@ import { PerimetreDialogComponent } from './perimetre/dialog/perimetre-dialog/pe
         MatDividerModule,
         MatMenuModule,
         MatSidenavModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatSelectModule,
+
 
     ],
     declarations: [
@@ -79,7 +87,8 @@ import { PerimetreDialogComponent } from './perimetre/dialog/perimetre-dialog/pe
         PerimetreComponent,
         DetailReleaseComponent,
         DialogEditComponent,
-        PerimetreDialogComponent
+        PerimetreDialogComponent,
+        ManagerComponent
     ],
     providers: [SessionService, AppSessionService, AuthGuardService, GestionnaireGuardService, UserGuardService, AdminGuardService,
         {

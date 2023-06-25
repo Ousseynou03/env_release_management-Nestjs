@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppSessionService } from '../../../services/app-session.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-release',
@@ -28,9 +30,176 @@ export class DetailReleaseComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginatorAnomalie!: MatPaginator;
   @ViewChild(MatSort) sortAnomalie!: MatSort;
 
-  constructor(private app_service: AppSessionService,) { }
+  constructor(private app_service: AppSessionService,public dialog: MatDialog, protected activatedRoute: ActivatedRoute,
+    protected router: Router) { }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe(() => {
+      this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+      this.info = this.activatedRoute.snapshot.paramMap.get('nomRelase');
+    });
+
+    if(this.id){
+      this.getAllTicket(this.id);
+    }
   }
 
+    // Partie Ticket
+    getAllTicket(id:number){
+      this.app_service.getAllTicketForRelease(id)
+      .subscribe({
+        next: (res) =>{
+          this.dataSourceTicket = new MatTableDataSource(res);
+          this.dataSourceTicket.paginator = this.paginatorTicket;
+          this.dataSourceTicket.sort = this.sortTicket; 
+        },
+      })
+    }
+  
+    ngAfterViewInit() {
+      if(this.paginatorTicket === undefined){
+        this.dataSourceTicket.paginator = this.paginatorTicket;
+      }
+    }
+  
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSourceTicket.filter = filterValue.trim().toLowerCase();
+  
+      if (this.dataSourceTicket.paginator) {
+        this.dataSourceTicket.paginator.firstPage();
+      }
+    }
+
+    /*
+    editDialogTicket(row: any, idR:number, idC:number|null, idA: number|null){ 
+      this.dialog.open(ManagerDialogComponent, {
+        width: '50%',
+        data: {row, idR, idC, idA}
+      }).afterClosed().subscribe(()=>{
+        this.getAllTicket(this.id);
+        
+      });
+    }
+  
+      ajoutDialogTicket(id: number){ 
+    this.dialog.open(TicketDialogComponent,{
+      data:{id},
+      width: '50%',
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
+      
+    });
+  }
+
+  ajoutDialogAnomalie(id: number){ 
+    this.dialog.open(AnomalieDialogComponent, {
+      data:{id},
+      width: '50%',
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
+      
+    });
+  }
+
+  ajoutDialogaCasTest(id: number){ 
+    this.dialog.open(CasTestDialogComponent, {
+      data:{id},
+      width: '50%',
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
+      
+    });
+  }
+
+
+  deleteTicket(id: number, idC: number, idA:number){
+    if ((idC!==null && idA!==null)) {
+      this.ticketService.deleteTicket(id)
+        .subscribe({
+          next:(_res) =>{
+            this.anomalieService.deleteAnomalie(idA)
+            .subscribe({
+              next:(_value) =>{
+                this.casTestService.deleteCasTest(idC)
+                .subscribe({
+                  next:(_value) =>{
+                    alert("Ticket, Anomalie, Cas De Test supprimés avec succès!!!");
+                    this.getAllTicket(this.id); 
+                  },
+                })
+              },
+            })    
+          },
+        })
+        alert("Ticket, Anomalie supprimés avec succès!!!");
+        this.getAllTicket(this.id);
+      }
+      else if((idC!==null && idA===null)){
+        this.ticketService.deleteTicket(id)
+            .subscribe({
+              next:(_res) =>{
+                this.casTestService.deleteCasTest(idC)
+                .subscribe({
+                  next:(_value) =>{
+                  },
+                })
+              },
+            })
+            alert("Ticket, Cas De Test supprimés avec succès!!!");
+            this.getAllTicket(this.id);
+      }
+      else if((idC===null && idA!==null)){
+        this.ticketService.deleteTicket(id)
+            .subscribe({
+              next:(_res) =>{
+                this.anomalieService.deleteAnomalie(idC)
+                .subscribe({
+                  next:(_value) =>{
+                    
+                  },
+                })
+              },
+            })
+            alert("Ticket, Anomalies supprimés avec succès!!!");
+            this.getAllTicket(this.id);
+      }
+      else{
+        this.ticketService.deleteTicket(id)
+        .subscribe({
+          next:(_res) =>{
+              alert("Ticket supprimé avec succès!!!");
+              this.getAllTicket(this.id);
+          },
+          error:()=>{
+            this.getAllTicket(this.id);
+          }
+        })
+        alert("Ticket supprimé avec succès!!!");
+        this.getAllTicket(this.id);
+      }
+  }
+
+  // Partie Anomalie
+  getAllAnomalie(){
+    this.anomalieService.getAllAnomalie()
+    .subscribe({
+      next: (res) =>{
+        this.dataSourceAnomalie = new MatTableDataSource(res);
+        this.dataSourceAnomalie.paginator = this.paginatorAnomalie;
+        this.dataSourceAnomalie.sort = this.sortAnomalie; 
+      },
+    })
+  }
+
+  deleteAnomalie(id: number){
+    this.anomalieService.deleteAnomalie(id)
+    .subscribe({
+      next:(_res) =>{
+          this.getAllAnomalie();
+      },
+    })
+  }
+  
+*/
 }
