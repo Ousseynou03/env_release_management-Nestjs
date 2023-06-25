@@ -43,6 +43,12 @@ import { DetailReleaseComponent } from './perimetre/detail/detail-release/detail
 import { DialogEditComponent } from './perimetre/dialog/dialog-edit/dialog-edit.component';
 import { PerimetreDialogComponent } from './perimetre/dialog/perimetre-dialog/perimetre-dialog.component';
 import { ManagerComponent } from './manager/manager.component';
+import { AnomalieDialogComponent } from './perimetre/detail/dialogs/anomalie/anomalie-dialog/anomalie-dialog.component';
+import { CasTestDialogComponent } from './perimetre/detail/dialogs/cas-test/cas-test-dialog/cas-test-dialog.component';
+import { ManagerDialogComponent } from './perimetre/detail/dialogs/manager/manager-dialog/manager-dialog.component';
+import { DetailScenarioDialogComponent } from './perimetre/detail/dialogs/scenario-test/detail-scenario/detail-scenario-dialog/detail-scenario-dialog.component';
+import { ScenarioTestDialogComponent } from './perimetre/detail/dialogs/scenario-test/detail-scenario/scenario-test-dialog/scenario-test-dialog.component';
+import { TicketDialogComponent } from './perimetre/detail/dialogs/ticket/ticket-dialog/ticket-dialog.component';
 
 @NgModule({
     imports: [
@@ -88,7 +94,13 @@ import { ManagerComponent } from './manager/manager.component';
         DetailReleaseComponent,
         DialogEditComponent,
         PerimetreDialogComponent,
-        ManagerComponent
+        ManagerComponent,
+        AnomalieDialogComponent,
+        CasTestDialogComponent,
+        ManagerDialogComponent,
+        DetailScenarioDialogComponent,
+        ScenarioTestDialogComponent,
+        TicketDialogComponent
     ],
     providers: [SessionService, AppSessionService, AuthGuardService, GestionnaireGuardService, UserGuardService, AdminGuardService,
         {

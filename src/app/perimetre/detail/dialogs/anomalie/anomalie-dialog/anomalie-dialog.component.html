@@ -1,0 +1,99 @@
+<div class="container-fluide page">
+    <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="page_content-data position-absolute text-center"></div>
+          
+        
+        <div class="container">
+            <div class="mt-2">
+                <mat-stepper >
+
+                    <mat-step [stepControl]="FormGroup5">
+    
+                        <ng-template matStepLabel>Anomalie</ng-template>
+                        <form [formGroup]="FormGroup5" class="mt-4">
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Criticité</mat-label>
+                                <mat-select formControlName="criticite">
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="BLOQUANTE">Bloquante</mat-option>
+                                  <mat-option value="MAJEURE">Majeur</mat-option>
+                                  <mat-option value="MINEURE">Mineur</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Priorité</mat-label>
+                                <mat-select formControlName="priorite">
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="STANDARD">Standard</mat-option>
+                                  <mat-option value="EN_URGENCE">En Urgence</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Statut</mat-label>
+                                <mat-select formControlName="statut">
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="OUVERTE">Ouverte</mat-option>
+                                  <mat-option value="RESOLUE">Résolue</mat-option>
+                                  <mat-option value="QUALIFICATION">Qualification</mat-option>
+                                  <mat-option value="FERME">Fermée</mat-option>
+                                  <mat-option value="CLOTUREE">Cloturée</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>En Cours</mat-label>
+                                <mat-select formControlName="enCours">
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="CORRIGEES">Corrigées</mat-option>
+                                  <mat-option value="EVOLUTION">Evolution</mat-option>
+                                  <mat-option value="A_TRAITES">A Traites</mat-option>
+                                  <mat-option value="VERIFICATION">Vérification</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Cloturée</mat-label>
+                                <mat-select formControlName="cloturee">
+                                  <mat-option value=""></mat-option>
+                                  <mat-option value="ValidationCorrectifs">Validation Correctifs</mat-option>
+                                  <mat-option value="Rejetees">Rejetées</mat-option>
+                                  <mat-option value="ProblemeDocumentaire">Problème Documentaire</mat-option>
+                                  <mat-option value="ArbitrageProjetEvolution">Arbitrage Projet Evolution</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Ticket</mat-label>
+                                <mat-select formControlName="ticket" required>
+                                  <mat-option value=""></mat-option>
+                                  <mat-option *ngFor="let tickets of listTicket" [value]="tickets.refTicket">{{tickets.titre}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </form>
+
+                        <mat-toolbar style="background-color: white;"> 
+                            <span class="example-spacer"></span>
+                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" mat-dialog-close>
+                                Close
+                            </button>
+                            |
+                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="addAnomalie()">
+                                Envoyer
+                            </button>
+                        </mat-toolbar>
+                    </mat-step>
+        
+        
+                
+                    
+                </mat-stepper>
+            </div>
+        </div>
+    </div>
+    
+</div>

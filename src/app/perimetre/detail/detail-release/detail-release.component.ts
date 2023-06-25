@@ -5,6 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AppSessionService } from '../../../services/app-session.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnomalieDialogComponent } from '../dialogs/anomalie/anomalie-dialog/anomalie-dialog.component';
+import { CasTestDialogComponent } from '../dialogs/cas-test/cas-test-dialog/cas-test-dialog.component';
+import { ManagerDialogComponent } from '../dialogs/manager/manager-dialog/manager-dialog.component';
+import { TicketDialogComponent } from '../dialogs/ticket/ticket-dialog/ticket-dialog.component';
 
 @Component({
   selector: 'app-detail-release',
@@ -71,7 +75,7 @@ export class DetailReleaseComponent implements OnInit {
       }
     }
 
-    /*
+    
     editDialogTicket(row: any, idR:number, idC:number|null, idA: number|null){ 
       this.dialog.open(ManagerDialogComponent, {
         width: '50%',
@@ -115,13 +119,13 @@ export class DetailReleaseComponent implements OnInit {
 
   deleteTicket(id: number, idC: number, idA:number){
     if ((idC!==null && idA!==null)) {
-      this.ticketService.deleteTicket(id)
+      this.app_service.deleteTicket(id)
         .subscribe({
           next:(_res) =>{
-            this.anomalieService.deleteAnomalie(idA)
+            this.app_service.deleteAnomalie(idA)
             .subscribe({
               next:(_value) =>{
-                this.casTestService.deleteCasTest(idC)
+                this.app_service.deleteCasTest(idC)
                 .subscribe({
                   next:(_value) =>{
                     alert("Ticket, Anomalie, Cas De Test supprimés avec succès!!!");
@@ -136,10 +140,10 @@ export class DetailReleaseComponent implements OnInit {
         this.getAllTicket(this.id);
       }
       else if((idC!==null && idA===null)){
-        this.ticketService.deleteTicket(id)
+        this.app_service.deleteTicket(id)
             .subscribe({
               next:(_res) =>{
-                this.casTestService.deleteCasTest(idC)
+                this.app_service.deleteCasTest(idC)
                 .subscribe({
                   next:(_value) =>{
                   },
@@ -150,10 +154,10 @@ export class DetailReleaseComponent implements OnInit {
             this.getAllTicket(this.id);
       }
       else if((idC===null && idA!==null)){
-        this.ticketService.deleteTicket(id)
+        this.app_service.deleteTicket(id)
             .subscribe({
               next:(_res) =>{
-                this.anomalieService.deleteAnomalie(idC)
+                this.app_service.deleteAnomalie(idC)
                 .subscribe({
                   next:(_value) =>{
                     
@@ -165,7 +169,7 @@ export class DetailReleaseComponent implements OnInit {
             this.getAllTicket(this.id);
       }
       else{
-        this.ticketService.deleteTicket(id)
+        this.app_service.deleteTicket(id)
         .subscribe({
           next:(_res) =>{
               alert("Ticket supprimé avec succès!!!");
@@ -182,7 +186,7 @@ export class DetailReleaseComponent implements OnInit {
 
   // Partie Anomalie
   getAllAnomalie(){
-    this.anomalieService.getAllAnomalie()
+    this.app_service.getAllAnomalie()
     .subscribe({
       next: (res) =>{
         this.dataSourceAnomalie = new MatTableDataSource(res);
@@ -193,7 +197,7 @@ export class DetailReleaseComponent implements OnInit {
   }
 
   deleteAnomalie(id: number){
-    this.anomalieService.deleteAnomalie(id)
+    this.app_service.deleteAnomalie(id)
     .subscribe({
       next:(_res) =>{
           this.getAllAnomalie();
@@ -201,5 +205,4 @@ export class DetailReleaseComponent implements OnInit {
     })
   }
   
-*/
 }
