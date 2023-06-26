@@ -1,1 +1,25 @@
-<p>detail-scenario-dialog works!</p>
+<h2 mat-dialog-title>Nouveau Scénario</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form action="" [formGroup]="scenarioForm">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Scénario</mat-label>
+        <input matInput placeholder="nom scenario" formControlName="scenario" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Cas De Test</mat-label>
+        <mat-select formControlName="casDeTest" required>
+          <mat-option value=""></mat-option>
+          <mat-option *ngFor="let cas of listCasTest" [value]="cas">CasTest-{{cas.refCasTest}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <button mat-fab extended  color="accent" mat-dialog-close>Annuler</button>
+  <button mat-fab extended  color="primary"  [mat-dialog-close]="true" cdkFocusInitial (click)="addScenario()">{{actionBtn}}</button>
+</mat-dialog-actions>

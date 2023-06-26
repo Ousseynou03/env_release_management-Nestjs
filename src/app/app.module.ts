@@ -53,6 +53,14 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {ChartModule} from 'primeng/chart';
 import {StepsModule} from 'primeng/steps';
+import { TabViewModule } from 'primeng/tabview';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
@@ -88,6 +96,8 @@ import {StepsModule} from 'primeng/steps';
         MatSelectModule,
       //  ChartModule,
        // StepsModule
+
+       
 
 
     ],
