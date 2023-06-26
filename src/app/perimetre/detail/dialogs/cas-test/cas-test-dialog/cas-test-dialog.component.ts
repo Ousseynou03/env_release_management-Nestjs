@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TicketDialogComponent } from '../../ticket/ticket-dialog/ticket-dialog.component';
 import { AppSessionService } from '../../../../../services/app-session.service';
 import { ITicket } from '../../../../../manager/manager.model';
@@ -12,16 +12,7 @@ import { ITicket } from '../../../../../manager/manager.model';
 })
 export class CasTestDialogComponent implements OnInit {
 
-  listTicket!: ITicket[] ;
-
-  FormGroup6 = this._formBuilder.group({
-    resultat: [null, Validators.required],
-    scenario: [null, Validators.required],
-    ticket: new FormControl(null)
-  });
-
-  refRelease!: number;
-
+  listTicket!: ITicket[];
 
   FormGroup3 = this._formBuilder.group({
     titre: [null, Validators.required],
@@ -42,11 +33,22 @@ export class CasTestDialogComponent implements OnInit {
     resultat: [null, Validators.required]
   });
 
+  FormGroup6 = this._formBuilder.group({
+    resultat: [null, Validators.required],
+    scenario: [null, Validators.required],
+    ticket: new FormControl(null)
+  });
+
+  refRelease!: number;
+
+  currentStepIndex = 0;
+
   constructor(
     private app_service: AppSessionService,
     private _formBuilder: FormBuilder,
     public dialog: MatDialog, 
-    private dialogRef : MatDialogRef<TicketDialogComponent>,@Inject(MAT_DIALOG_DATA) public data:any) { }
+    private dialogRef : MatDialogRef<TicketDialogComponent>,@Inject(MAT_DIALOG_DATA) public data:any
+  ) { }
 
   ngOnInit(): void {
     this.app_service.getAllTicketForRelease(Number(this.data?.id))
@@ -100,9 +102,19 @@ export class CasTestDialogComponent implements OnInit {
       
     }
   }
+  prevStep() {
+    this.currentStepIndex--;
+  }
 
+  nextStep() {
+    if (this.currentStepIndex < this.totalSteps() - 1) {
+      this.currentStepIndex++;
+    } else {
+      this.addCasDeTest();
+    }
+  }
+
+  totalSteps() {
+    return 1; // Mettez le nombre total d'étapes ici
+  }
 }
-
-
-
-

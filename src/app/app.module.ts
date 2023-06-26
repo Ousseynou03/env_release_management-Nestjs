@@ -1,5 +1,5 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
@@ -50,6 +50,9 @@ import { DetailScenarioDialogComponent } from './perimetre/detail/dialogs/scenar
 import { ScenarioTestDialogComponent } from './perimetre/detail/dialogs/scenario-test/detail-scenario/scenario-test-dialog/scenario-test-dialog.component';
 import { TicketDialogComponent } from './perimetre/detail/dialogs/ticket/ticket-dialog/ticket-dialog.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { BrowserModule } from '@angular/platform-browser';
+import {ChartModule} from 'primeng/chart';
+import {StepsModule} from 'primeng/steps';
 
 @NgModule({
     imports: [
@@ -66,6 +69,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
         AdminLayoutModule,
         NgbModule,
         //Material imports
+        BrowserModule,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
@@ -82,6 +86,8 @@ import { DashbordComponent } from './dashbord/dashbord.component';
         MatStepperModule,
         MatDatepickerModule,
         MatSelectModule,
+      //  ChartModule,
+       // StepsModule
 
 
     ],
@@ -113,6 +119,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     ],
     bootstrap: [AppComponent],
     entryComponents: [ModalComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
 }

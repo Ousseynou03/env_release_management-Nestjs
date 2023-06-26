@@ -1,65 +1,3 @@
-<!--
-
-<div class="container-fluide page">
-    <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
-    <div class="page_content shadow p-3 position-relative">
-        <div class="page_content-data position-absolute text-center"></div>
-          
-        
-        <div class="container">
-            <div class="mt-2">
-                <mat-stepper> 
-                    <mat-step [stepControl]="FormGroup6">
-                        <ng-template matStepLabel>Test</ng-template>
-                        <form [formGroup]="FormGroup6" class="mt-3">
-                            <h2 style="text-align: center;">Cas De Test</h2>
-
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Resultat</mat-label>
-                                <mat-select formControlName="resultat" required>
-                                  <mat-option value=""></mat-option>
-                                  <mat-option value="En_Cours">En Cours</mat-option>
-                                  <mat-option value="OK">OK</mat-option>
-                                  <mat-option value="KO">KO</mat-option>
-                                  <mat-option value="Bloquee">Bloquée</mat-option>
-                                  <mat-option value="Abandonnes">Abandonnée</mat-option>
-                                  <mat-option value="Non_Teste">Non testée</mat-option>
-                                  <mat-option value="Hors_Perimetre">Hors Périmètre</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <h2 style="text-align: center;">Choisir Ticket</h2>
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Ticket</mat-label>
-                                <mat-select formControlName="ticket" required>
-                                  <mat-option value=""></mat-option>
-                                  <mat-option *ngFor="let tickets of listTicket" [value]="tickets.refTicket">{{tickets.titre}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            
-
-                        </form>
-                        <mat-toolbar style="background-color: white;"> 
-                            <span class="example-spacer"></span>
-                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" mat-dialog-close>
-                                Close
-                            </button>
-                            |
-                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="addCasDeTest()">
-                                Envoyer
-                            </button>
-                        </mat-toolbar>
-                    </mat-step>
-        
-                    
-                </mat-stepper> 
-            </div>
-        </div>
-    </div>
-    
-</div>
-
--->
 
 <div class="container-fluide page">
     <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
@@ -69,9 +7,31 @@
       <div class="container">
         <div class="mt-2 stepper-wrapper">
           <div class="step" [class.active]="currentStepIndex === 0">
-            <h2 style="text-align: center;">Cas De Test</h2>
             <form [formGroup]="FormGroup6" class="mt-3">
-              <!-- Contenu de la première étape -->
+
+                <h2 style="text-align: center;">Cas De Test</h2>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Resultat</mat-label>
+                    <mat-select formControlName="resultat" required>
+                      <mat-option value=""></mat-option>
+                      <mat-option value="En_Cours">En Cours</mat-option>
+                      <mat-option value="OK">OK</mat-option>
+                      <mat-option value="KO">KO</mat-option>
+                      <mat-option value="Bloquee">Bloquée</mat-option>
+                      <mat-option value="Abandonnes">Abandonnée</mat-option>
+                      <mat-option value="Non_Teste">Non testée</mat-option>
+                      <mat-option value="Hors_Perimetre">Hors Périmètre</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <h2 style="text-align: center;">Choisir Ticket</h2>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Ticket</mat-label>
+                    <mat-select formControlName="ticket" required>
+                      <mat-option value=""></mat-option>
+                      <mat-option *ngFor="let tickets of listTicket" [value]="tickets.refTicket">{{tickets.titre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </form>
             <mat-toolbar style="background-color: white;">
               <span class="example-spacer"></span>

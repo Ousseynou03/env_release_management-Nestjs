@@ -1,21 +1,46 @@
-.example-spacer {
-    flex: 1 1 auto;
-}
-
-table {
-    width: 100%;
-}
+.page_content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
   
-.mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-}
+  .step {
+    display: none;
+    text-align: center;
+  }
   
-td, th {
-    width: 15%;
-}
-
-.mat-mdc-form-field {
-    font-size: 14px;
+  .step.active {
+    display: block;
+  }
+  
+  .step-header {
+    margin-bottom: 20px;
+  }
+  
+  .step-content {
+    margin-bottom: 20px;
+  }
+  
+  .step-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .mat-form-field {
     width: 100%;
-}
+    margin-bottom: 20px;
+  }
+  
+  .mat-toolbar {
+    margin-top: 20px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mat-toolbar button {
+    margin-left: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
