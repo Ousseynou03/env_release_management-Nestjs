@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as envs from '../models/environments-data';
-import {AppSessionService, SessionService} from '../services';
+import {AppSessionService} from '../services';
 import {EMPTY, Subscription} from 'rxjs';
 import Swal from 'sweetalert2';
 import {Indisponibilite} from '../models/indisponibilite-model';
@@ -59,7 +59,7 @@ export class EnvironmentsComponent implements OnInit, OnDestroy {
     modal: true
   };
 
-  constructor(private api_service: SessionService, private element: ElementRef, private app_service: AppSessionService) { }
+  constructor(private element: ElementRef, private app_service: AppSessionService) { }
 
   ngOnInit(): void {
     this.formData = this.setFormData();
@@ -233,7 +233,6 @@ export class EnvironmentsComponent implements OnInit, OnDestroy {
 
   clearForm() {
     this.searchObject.reset();
-    this.api_service.emitIndisponibilites()
   }
 
 

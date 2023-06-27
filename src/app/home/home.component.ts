@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
-import {AppSessionService, SessionService} from '../services';
+import {AppSessionService} from '../services';
 import {Subscription} from 'rxjs';
 import {Planning} from '../models/planning-model';
 
@@ -17,7 +17,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/releases', title: 'Releases',  icon: 'pe-7s-note2', class: 'Utilisateur' },
     { path: '/plannings', title: 'Plannings',  icon: 'pe-7s-clock', class: 'Utilisateur' },
     { path: '/roadmaps', title: 'Roadmaps',  icon: 'pe-7s-map', class: 'Utilisateur' },
-    //{ path: '/testeur', title: 'Testeur',  icon: 'pe-7s-map', class: 'Utilisateur' },
+    { path: '/testeur', title: 'Testeur',  icon: 'pe-7s-map', class: 'Utilisateur' },
+    { path: '/perimetre', title: 'Perimetre',  icon: 'pe-7s-map', class: 'Utilisateur' },
 ];
 
 @Component({
@@ -53,7 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     };
     today = new Date();
 
-    constructor(private api_service: SessionService, private app_service: AppSessionService) { }
+    constructor(private app_service: AppSessionService) { }
 
   ngOnInit() {
       this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -158,11 +159,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         const lastDay = date.getDate() - (date.getDay() - 1) + 6;
         return new Date(date.setDate(lastDay));
     }
-
-    getRole() {
-        return this.api_service.getRole()
-    }
-
     ngOnDestroy(): void {
         if (this.planningSubscription) {
             this.planningSubscription.unsubscribe();

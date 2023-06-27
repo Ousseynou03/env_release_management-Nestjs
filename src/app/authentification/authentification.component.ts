@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AppSessionService, SessionService} from '../services';
+import {AppSessionService} from '../services';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class AuthentificationComponent implements OnInit {
   login: FormGroup;
 
-  constructor(private api_service: SessionService, private router: Router, private app_service: AppSessionService) {
+  constructor(private router: Router, private app_service: AppSessionService) {
   }
 
   ngOnInit(): void {

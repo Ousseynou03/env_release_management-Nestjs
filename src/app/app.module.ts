@@ -14,11 +14,10 @@ import {AppComponent} from './app.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {AuthentificationComponent} from './authentification/authentification.component';
-import {AppSessionService, SessionService} from './services';
-import {AuthGuardService} from './guards/is_auth';
-import {GestionnaireGuardService} from './guards/is_gestionnaire';
+import {AppSessionService} from './services';
+
 import {UserGuardService} from './guards/is_user';
-import {AdminGuardService} from './guards/is_admin';
+
 import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {ModalComponent} from './modal/modal.component';
@@ -120,7 +119,7 @@ import { ToastModule } from 'primeng/toast';
         TicketDialogComponent,
         DashbordComponent
     ],
-    providers: [SessionService, AppSessionService, AuthGuardService, GestionnaireGuardService, UserGuardService, AdminGuardService,
+    providers: [ AppSessionService, UserGuardService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

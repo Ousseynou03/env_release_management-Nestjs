@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { DateRange, IgxDateRangePickerComponent, OverlaySettings } from 'igniteui-angular';
 import {Planning} from '../models/planning-model';
-import {AppSessionService, SessionService} from '../services';
+import {AppSessionService} from '../services';
 import {EMPTY, Subscription} from 'rxjs';
 import Swal from 'sweetalert2';
 import {catchError, map} from 'rxjs/operators';
@@ -34,7 +34,7 @@ export class PlanningComponent implements OnInit, OnDestroy {
     modal: true
   };
 
-  constructor(private element: ElementRef, private api_service: SessionService, private app_service: AppSessionService) { }
+  constructor(private element: ElementRef, private app_service: AppSessionService) { }
 
   ngOnInit(): void {
     this.planningSubscription = this.getPlannings()

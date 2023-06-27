@@ -10,7 +10,7 @@ import {AdminLayoutRoutes} from './admin-layout.routing';
 
 import {HomeComponent} from '../../home/home.component';
 import {KeyvaluePipe} from '../../pipes/keyvalue.pipe';
-import {FullNamePipe} from '../../pipes/full-name.pipe';
+
 import {ColumnManagerPipe} from '../../pipes/column-manager.pipe';
 import {PendingRequestsPipe} from '../../pipes/pending-requests.pipe';
 import {ReleasesComponent} from '../../releases/releases.component';
@@ -37,7 +37,7 @@ import {FormatArrayPipe} from '../../pipes/format-array.pipe';
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
     ],
     exports: [
-        KeyvaluePipe, FullNamePipe, ColumnManagerPipe, EnCoursPipe, EnCoursPipe, FormatArrayPipe
+        KeyvaluePipe, ColumnManagerPipe, EnCoursPipe, EnCoursPipe, FormatArrayPipe
     ],
     declarations: [
         HomeComponent,
@@ -49,7 +49,6 @@ import {FormatArrayPipe} from '../../pipes/format-array.pipe';
         PlanningDetailComponent,
         ModalComponent,
         KeyvaluePipe,
-        FullNamePipe,
         ColumnManagerPipe,
         PendingRequestsPipe,
         EnCoursPipe,

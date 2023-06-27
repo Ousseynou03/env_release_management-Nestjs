@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Planning} from '../models/planning-model';
-import {AppSessionService, SessionService} from '../services';
+import {AppSessionService} from '../services';
 import {Subscription} from 'rxjs/Subscription';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -42,7 +42,7 @@ export class PlanningDetailComponent implements OnInit, OnDestroy {
     'closeButtonLabel': 'Fermer'
   }
 
-  constructor(private route: ActivatedRoute, private api_service: SessionService, private app_service: AppSessionService) { }
+  constructor(private route: ActivatedRoute, private app_service: AppSessionService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EMPTY, Subscription} from 'rxjs';
-import {AppSessionService, SessionService} from '../services';
+import {AppSessionService} from '../services';
 import Swal from 'sweetalert2';
 import {ActivatedRoute} from '@angular/router';
 import * as envs_data from '../models/environments-data';
@@ -31,7 +31,7 @@ export class EnvironmentDetailComponent implements OnInit, OnDestroy {
   searchObject: FormGroup;
 
 
-  constructor(private api_service: SessionService, private route: ActivatedRoute, private app_service: AppSessionService) {
+  constructor(private route: ActivatedRoute, private app_service: AppSessionService) {
   }
 
   ngOnInit(): void {
@@ -175,7 +175,7 @@ export class EnvironmentDetailComponent implements OnInit, OnDestroy {
 
   clearForm() {
     this.searchObject.reset();
-    this.api_service.emitEnvironments()
+    
   }
 
   ngOnDestroy(): void {

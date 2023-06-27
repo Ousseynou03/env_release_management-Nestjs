@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import firebase from 'firebase';
+
 
 @Component({
   selector: 'app-root',
@@ -18,8 +18,7 @@ export class AppComponent implements OnInit {
              messagingSenderId: '462093765302',
              appId: '1:462093765302:web:4e5f4e7dd78e894884f417'
         };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+  
      }
 
     ngOnInit() {

@@ -3,7 +3,7 @@ import {ROUTES} from '../../sidebar/sidebar.component';
 import {Location} from '@angular/common';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
-import {AppSessionService, SessionService} from '../../services';
+import {AppSessionService} from '../../services';
 import {User} from '../../models/user';
 import * as envs_data from '../../models/environments-data';
 
@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
 
 
     constructor(location: Location, private element: ElementRef,
-                private router: Router, private api_service: SessionService,  private app_service: AppSessionService) {
+                private router: Router, private app_service: AppSessionService) {
         this.location = location;
         this.sidebarVisible = false;
     }
