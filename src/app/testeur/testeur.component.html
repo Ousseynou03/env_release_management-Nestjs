@@ -5,7 +5,7 @@
         <div class="page_box p-3 mt-2">Liste des Testeurs</div>
           <span class="example-spacer"></span>
           <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="openDialog()">
-            <mat-icon style="background-color: white;">add</mat-icon>
+          <!--  <mat-icon style="background-color: white;">add</mat-icon> -->
           <span style="color: white;">Ajouter</span>  
           </button>
       </mat-toolbar>
@@ -17,7 +17,7 @@
                   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
                 </mat-form-field>
                 
-                <div class="mat-elevation-z8" style="color: white;">
+                <div class="mat-elevation-z8" >
                   <table mat-table [dataSource]="dataSource" matSort style="color: white;">
                 
                     <!-- ID Column -->
