@@ -1,20 +1,25 @@
-import {EnvEnum} from './env-enum';
+import {Cause, EnvEnum, Impact, ListApp, Momment, NivTest, } from './env-enum';
 
 export class Indisponibilite {
 
     id: string
     environment: EnvEnum
-    type_indisponibilte: string
-    jira: string
-    impact_env: string
-    delai_correctif: string
+    liste_app: ListApp
+    niveau_test: NivTest
+    impact_env: Impact
+    momment : Momment
+    commentaires : string
+    cause : Cause
 
     constructor() {
-        this.environment = EnvEnum.dev;
-        this.type_indisponibilte = '';
-        this.jira = '';
-        this.impact_env = '';
-        this.delai_correctif = '';
+        this.environment = EnvEnum.prod;
+        this.liste_app = ListApp.one_customer;
+        this.niveau_test = NivTest.integration;
+        this.impact_env = Impact.charge;
+        this.momment = Momment.installation_init;
+        this.cause = Cause.attente_liv_correctiuon;
+        this.commentaires = '';
+      
     }
 
     is_date(property) {
@@ -33,6 +38,7 @@ export class Indisponibilite {
     }
 
     get_filter_property() {
-        return ['environment']
+        return ['environment'];
+
     }
 }

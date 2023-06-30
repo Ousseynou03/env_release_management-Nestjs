@@ -19,7 +19,8 @@
     </form>
 
 </mat-dialog-content>
-<mat-dialog-actions [align]="'end'">
-  <button mat-fab extended  color="accent" mat-dialog-close>Annuler</button>
-  <button mat-fab extended  color="primary"  [mat-dialog-close]="true" cdkFocusInitial (click)="addScenario()">{{actionBtn}}</button>
-</mat-dialog-actions>
+<div class="step-buttons">
+  <button class="btn btn-secondary" class="btn btn-secondary" color="primary" ria-label="Example icon-button with share icon" mat-dialog-close>Annuler</button>
+  <button class="btn btn-primary" (click)="addScenario()">{{actionBtn}}</button>
+</div>
+

@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { TicketDialogComponent } from '../../ticket/ticket-dialog/ticket-dialog.component';
 import { AppSessionService } from '../../../../../services/app-session.service';
 import { ITicket } from '../../../../../manager/manager.model';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-cas-test-dialog',
@@ -57,51 +59,53 @@ export class CasTestDialogComponent implements OnInit {
     })
   }
 
-  addCasDeTest():void{
-    if (this.FormGroup6.value.resultat!==null && this.FormGroup6.value.ticket!==null) {
-      if (this.FormGroup6.value.scenario!==null) {
-        
-      } else {
-        this.FormGroup1.value.resultat=this.FormGroup6.value.resultat;
-        this.app_service.postCasTest(this.FormGroup1.value)
-        .subscribe({
-          next:(value1) =>{
-            this.app_service.getTicket(Number(this.FormGroup6.value.ticket))
-            .subscribe({
-             next:(value) =>{
-                 this.FormGroup3.value.titre=value["titre"];
-                 this.FormGroup3.value.type=value["type"];
-                 this.FormGroup3.value.testeur=value["testeur"];
-                 this.FormGroup3.value.release=value["release"];
-                 this.FormGroup3.value.casDeTest=value1
-                 this.FormGroup3.value.anomalies=value["anomalies"];
-                 this.app_service.putTicket(this.FormGroup3.value, value["refTicket"])
-                 .subscribe({
-                   next:(res)=>{
-                     alert("Cas de Test ajouter avec Succes");
-                     this.dialogRef.close();
-                   },
-                   error:()=>{
-                     this.app_service.deleteCasTest(value1["refCasTest"])
-                      .subscribe({
-                        next:(value) =>{
-                          alert("Impossible d'ajouter le Cas de Test");
-                          this.dialogRef.close();
-                        },
-                      })
-                   }
-                 })
-             },
-            })
-          },error:(err) =>{
-              alert("Impossible d'envoyer les données. veuillez réassayer ultérieurment.")
-          },
-        })
-
-      }
-      
+addCasDeTest(): void {
+  if (this.FormGroup6.value.resultat !== null && this.FormGroup6.value.ticket !== null) {
+    if (this.FormGroup6.value.scenario !== null) {
+      // Ajoutez ici le code correspondant à la logique du scénario (si nécessaire)
+    } else {
+      this.FormGroup1.value.resultat = this.FormGroup6.value.resultat;
+      this.app_service.postCasTest(this.FormGroup1.value).subscribe({
+        next: (value1) => {
+          this.app_service.getTicket(Number(this.FormGroup6.value.ticket)).subscribe({
+            next: (value) => {
+              this.FormGroup3.value.titre = value['titre'];
+              this.FormGroup3.value.type = value['type'];
+              this.FormGroup3.value.testeur = value['testeur'];
+              this.FormGroup3.value.release = value['release'];
+              this.FormGroup3.value.casDeTest = value1;
+              this.FormGroup3.value.anomalies = value['anomalies'];
+              this.app_service.putTicket(this.FormGroup3.value, value['refTicket']).subscribe({
+                next: (res) => {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Cas de test ajouté avec succès!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then();
+                  this.dialogRef.close();
+                },
+                error: () => {
+                  this.app_service.deleteCasTest(value1['refCasTest']).subscribe({
+                    next: (value) => {
+                      Swal.fire('Erreur!', 'Impossible d\'ajouter le Cas de Test.', 'error').then();
+                      this.dialogRef.close();
+                    },
+                  });
+                }
+              });
+            },
+          });
+        },
+        error: (err) => {
+          Swal.fire('Erreur!', 'Impossible d\'envoyer les données. Veuillez réessayer ultérieurement!', 'error').then();
+        },
+      });
     }
   }
+}
+
+
   prevStep() {
     this.currentStepIndex--;
   }

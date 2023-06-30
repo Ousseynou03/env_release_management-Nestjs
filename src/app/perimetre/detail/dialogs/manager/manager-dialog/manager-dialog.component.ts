@@ -6,6 +6,8 @@ import { AppSessionService } from '../../../../../services/app-session.service';
 import { ITesteur } from '../../../../../manager/manager.model';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-manager-dialog',
@@ -117,134 +119,151 @@ export class ManagerDialogComponent implements OnInit {
       })
   }
 
-  
-  updatePerimetreManager(){
-    if (this.FormGroup2.value.titre !==null && this.FormGroup2.value.type!==null && this.FormGroup2.value.testeur!==null) {
-      if (this.FormGroup3.value.resultat!==null) {
-        if (this.FormGroup5.value.cloturee!==null || this.FormGroup5.value.criticite!==null || this.FormGroup5.value.enCours!==null ||
-          this.FormGroup5.value.priorite!==null || this.FormGroup5.value.statut!==null) {
-          this.app_service.putCasTest(this.FormGroup3.value, this.editData.idC)
-          .subscribe({
-            next:(value1) =>{
-                this.app_service.putAnomalie(this.FormGroup5.value, this.editData.idA)
-                .subscribe({
-                  next:(value2) =>{
-                    this.app_service.getRelease(Number(this.editData.idR))
-                    .subscribe({
-                      next:(value) =>{
-                          this.FormGroup2.value.release=value;
-                          this.FormGroup2.value.casDeTest=value1;
-                          this.FormGroup2.value.anomalies=value2;
-                          this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket)
-                          .subscribe({
-                            next:(value) =>{
-                                alert("Ticket Modifier avec Succès!!!");
-                                this.dialogRef.close();
-                            },
-                          })
-                      },
-                    })
-                  },
-                })
-            },
-          })
-        }
-        else{
-          this.app_service.putCasTest(this.FormGroup3.value, this.editData.idC)
-          .subscribe({
-            next:(value1) =>{
-                this.app_service.getRelease(Number(this.editData.idR))
-                .subscribe({
-                  next:(value) =>{
-                      this.FormGroup2.value.release=value;
-                      this.FormGroup2.value.casDeTest=value1;
-                      this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket)
-                      .subscribe({
-                        next:(value) =>{
-                          alert("Ticket Modifier avec Succès!!!");
-                          this.dialogRef.close();
-                        },
-                      })
-                  },
-                })
-            },
-          })
-        }
-      }
 
-      else if(this.FormGroup5.value.cloturee!==null || this.FormGroup5.value.criticite!==null || this.FormGroup5.value.enCours!==null ||
-        this.FormGroup5.value.priorite!==null || this.FormGroup5.value.statut!==null){
-        this.app_service.putAnomalie(this.FormGroup5.value, this.editData.idA)
-        .subscribe({
-          next:(value1) =>{
-            this.app_service.getRelease(Number(this.editData.idR))
-            .subscribe({
-              next:(value2) =>{
-                  this.FormGroup2.value.release=value2;
-                  this.FormGroup2.value.anomalies=value1;
-                  this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket)
-                  .subscribe({
-                    next:(value) =>{
-                        alert("Ticket Modifier avec Succès!!!");
+updatePerimetreManager() {
+  if (
+    this.FormGroup2.value.titre !== null &&
+    this.FormGroup2.value.type !== null &&
+    this.FormGroup2.value.testeur !== null
+  ) {
+    if (this.FormGroup3.value.resultat !== null) {
+      if (
+        this.FormGroup5.value.cloturee !== null ||
+        this.FormGroup5.value.criticite !== null ||
+        this.FormGroup5.value.enCours !== null ||
+        this.FormGroup5.value.priorite !== null ||
+        this.FormGroup5.value.statut !== null
+      ) {
+        this.app_service.putCasTest(this.FormGroup3.value, this.editData.idC).subscribe({
+          next: (value1) => {
+            this.app_service.putAnomalie(this.FormGroup5.value, this.editData.idA).subscribe({
+              next: (value2) => {
+                this.app_service.getRelease(Number(this.editData.idR)).subscribe({
+                  next: (value) => {
+                    this.FormGroup2.value.release = value;
+                    this.FormGroup2.value.casDeTest = value1;
+                    this.FormGroup2.value.anomalies = value2;
+                    this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket).subscribe({
+                      next: (value) => {
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Ticket modifié avec succès!',
+                          showConfirmButton: false,
+                          timer: 1500
+                        }).then();
                         this.dialogRef.close();
-                    },
-                  })
-              },
-            })
-              
-          },
-        })
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      } else {
+        this.app_service.putCasTest(this.FormGroup3.value, this.editData.idC).subscribe({
+          next: (value1) => {
+            this.app_service.getRelease(Number(this.editData.idR)).subscribe({
+              next: (value) => {
+                this.FormGroup2.value.release = value;
+                this.FormGroup2.value.casDeTest = value1;
+                this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket).subscribe({
+                  next: (value) => {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Ticket modifié avec succès!',
+                      showConfirmButton: false,
+                      timer: 1500
+                    }).then();
+                    this.dialogRef.close();
+                  }
+                });
+              }
+            });
+          }
+        });
       }
-
-      else if (this.FormGroup5.value.cloturee!==null && this.FormGroup5.value.criticite!==null && this.FormGroup5.value.enCours!==null &&
-        this.FormGroup5.value.priorite!==null && this.FormGroup5.value.statut!==null && this.FormGroup3.value.resultat!==null){
-          this.app_service.getRelease(Number(this.editData.idR))
-          .subscribe({
-            next:(value) =>{
-                this.FormGroup2.value.release=value;
-                this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket)
-                .subscribe({
-                  next:(value) =>{
-                      alert("Ticket Modifier avec succès!!!");
-                      this.dialogRef.close();
-                  },
-                })
-            },
-          })
-      }
-      
-      else {
-        this.app_service.getRelease(Number(this.editData.idR))
-        .subscribe({
-          next:(value) =>{
-            this.FormGroup2.value.release=value;
-            this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket)
-            .subscribe({
-              next:(value) =>{
-
-                alert("Ticket Modifier avec Succès!!!");
-                this.dialogRef.close();
-
-                if (this.editData.idA!==null) {
-                  this.app_service.deleteAnomalie(Number(this.editData.idA))
-                  .subscribe({
-                    next:(value) =>{
-                        alert("Anomalie modifié avec succès");
-                    },
-                  })
+    } else if (
+      this.FormGroup5.value.cloturee !== null ||
+      this.FormGroup5.value.criticite !== null ||
+      this.FormGroup5.value.enCours !== null ||
+      this.FormGroup5.value.priorite !== null ||
+      this.FormGroup5.value.statut !== null
+    ) {
+      this.app_service.putAnomalie(this.FormGroup5.value, this.editData.idA).subscribe({
+        next: (value1) => {
+          this.app_service.getRelease(Number(this.editData.idR)).subscribe({
+            next: (value2) => {
+              this.FormGroup2.value.release = value2;
+              this.FormGroup2.value.anomalies = value1;
+              this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket).subscribe({
+                next: (value) => {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket modifié avec succès!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then();
+                  this.dialogRef.close();
                 }
-
-              },
-            })
-          },
-        })
-
-      }
-
-    } 
-    else {
-      alert("Il faut au moins remplir tous les champs de ticket!!!")
+              });
+            }
+          });
+        }
+      });
+    } else if (
+      this.FormGroup5.value.cloturee !== null &&
+      this.FormGroup5.value.criticite !== null &&
+      this.FormGroup5.value.enCours !== null &&
+      this.FormGroup5.value.priorite !== null &&
+      this.FormGroup5.value.statut !== null &&
+      this.FormGroup3.value.resultat !== null
+    ) {
+      this.app_service.getRelease(Number(this.editData.idR)).subscribe({
+        next: (value) => {
+          this.FormGroup2.value.release = value;
+          this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket).subscribe({
+            next: (value) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Ticket modifié avec succès!',
+                showConfirmButton: false,
+                timer: 1500
+              }).then();
+              this.dialogRef.close();
+            }
+          });
+        }
+      });
+    } else {
+      this.app_service.getRelease(Number(this.editData.idR)).subscribe({
+        next: (value) => {
+          this.FormGroup2.value.release = value;
+          this.app_service.putTicket(this.FormGroup2.value, this.editData.row.refTicket).subscribe({
+            next: (value) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Ticket modifié avec succès!',
+                showConfirmButton: false,
+                timer: 1500
+              }).then();
+              this.dialogRef.close();
+              if (this.editData.idA !== null) {
+                this.app_service.deleteAnomalie(Number(this.editData.idA)).subscribe({
+                  next: (value) => {
+                    Swal.fire('Succès!', 'Anomalie modifiée avec succès.', 'success').then();
+                  }
+                });
+              }
+            }
+          });
+        }
+      });
     }
+  } else {
+    Swal.fire('Oups!', 'Veuillez remplir tous les champs du ticket.', 'error').then();
   }
+}
+
 }
 

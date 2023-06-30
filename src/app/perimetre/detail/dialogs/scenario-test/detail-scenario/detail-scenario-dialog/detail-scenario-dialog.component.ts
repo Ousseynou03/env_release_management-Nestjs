@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AppSessionService } from '../../../../../../services/app-session.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -40,38 +41,57 @@ export class DetailScenarioDialogComponent implements OnInit {
       }
     }
   
-    addScenario(){
-      if(!this.editData){
-        if(this.scenarioForm.valid){
+  
+    addScenario(): void {
+      if (!this.editData) {
+        if (this.scenarioForm.valid) {
           this.app_service.postScenario(this.scenarioForm.value)
-          .subscribe({
-            next:(res)=>{
-              alert("Scénario ajouter avec succès");
-              this.scenarioForm.reset();
-              this.dialogRef.close('save');
-            },
-            error:()=>{
-              alert("Impossible d'ajouter un nouveau Scénario")
-            }
-          })
+            .subscribe({
+              next: (res) => {
+                Swal.fire({
+                  title: 'Ajouté !',
+                  text: 'Le scénario a été ajouté avec succès.',
+                  icon: 'success'
+                });
+                this.scenarioForm.reset();
+                this.dialogRef.close('save');
+              },
+              error: () => {
+                Swal.fire({
+                  title: 'Oups !',
+                  text: 'Impossible d\'ajouter un nouveau scénario.',
+                  icon: 'error'
+                });
+              }
+            });
         }
-      }else{
+      } else {
         this.updateScénario();
       }
     }
-  
-    updateScénario(){
+    
+    updateScénario(): void {
       this.app_service.putScenario(this.scenarioForm.value, this.editData.refScenario)
-      .subscribe({
-        next:(res)=>{
-          alert("Scénario Modifier avec Succes");
-          this.scenarioForm.reset();
-          this.dialogRef.close('update');
-        },
-        error:()=>{
-          alert("Impossible de modifier ce scénario");
-        }
-      })
+        .subscribe({
+          next: (res) => {
+            Swal.fire({
+              title: 'Modifié !',
+              text: 'Le scénario a été modifié avec succès.',
+              icon: 'success'
+            });
+            this.scenarioForm.reset();
+            this.dialogRef.close('update');
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Oups !',
+              text: 'Impossible de modifier ce scénario.',
+              icon: 'error'
+            });
+          }
+        });
     }
+    
+    
 
 }

@@ -9,6 +9,7 @@ import { AnomalieDialogComponent } from '../dialogs/anomalie/anomalie-dialog/ano
 import { CasTestDialogComponent } from '../dialogs/cas-test/cas-test-dialog/cas-test-dialog.component';
 import { ManagerDialogComponent } from '../dialogs/manager/manager-dialog/manager-dialog.component';
 import { TicketDialogComponent } from '../dialogs/ticket/ticket-dialog/ticket-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detail-release',
@@ -116,73 +117,69 @@ export class DetailReleaseComponent implements OnInit {
     });
   }
 
+ 
 
-  deleteTicket(id: number, idC: number, idA:number){
-    if ((idC!==null && idA!==null)) {
-      this.app_service.deleteTicket(id)
-        .subscribe({
-          next:(_res) =>{
-            this.app_service.deleteAnomalie(idA)
-            .subscribe({
-              next:(_value) =>{
-                this.app_service.deleteCasTest(idC)
-                .subscribe({
-                  next:(_value) =>{
-                    alert("Ticket, Anomalie, Cas De Test supprimés avec succès!!!");
-                    this.getAllTicket(this.id); 
-                  },
-                })
-              },
-            })    
-          },
-        })
-        alert("Ticket, Anomalie supprimés avec succès!!!");
-        this.getAllTicket(this.id);
-      }
-      else if((idC!==null && idA===null)){
-        this.app_service.deleteTicket(id)
-            .subscribe({
-              next:(_res) =>{
-                this.app_service.deleteCasTest(idC)
-                .subscribe({
-                  next:(_value) =>{
-                  },
-                })
-              },
-            })
-            alert("Ticket, Cas De Test supprimés avec succès!!!");
+  // ...
+  
+  deleteTicket(id: number, idC: number, idA: number) {
+    let successMessage = '';
+    let errorMessage = '';
+  
+    if (idC !== null && idA !== null) {
+      successMessage = 'Ticket, Anomalie, Cas de Test supprimés avec succès!';
+      errorMessage = 'Impossible de supprimer le Ticket, Anomalie, Cas de Test.';
+    } else if (idC !== null && idA === null) {
+      successMessage = 'Ticket, Cas de Test supprimés avec succès!';
+      errorMessage = 'Impossible de supprimer le Ticket et le Cas de Test.';
+    } else if (idC === null && idA !== null) {
+      successMessage = 'Ticket, Anomalie supprimés avec succès!';
+      errorMessage = 'Impossible de supprimer le Ticket et l\'Anomalie.';
+    } else {
+      successMessage = 'Ticket supprimé avec succès!';
+      errorMessage = 'Impossible de supprimer le Ticket.';
+    }
+  
+    Swal.fire({
+      title: 'Voulez-vous vraiment supprimer ce ticket ?',
+      text: 'Le ticket sera définitivement supprimé !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer !'
+    }).then((result) => {
+      if (result.value) {
+        this.app_service.deleteTicket(id).subscribe({
+          next: (_res) => {
+            if (idC !== null && idA !== null) {
+              this.app_service.deleteAnomalie(idA).subscribe();
+              this.app_service.deleteCasTest(idC).subscribe();
+            } else if (idC !== null && idA === null) {
+              this.app_service.deleteCasTest(idC).subscribe();
+            } else if (idC === null && idA !== null) {
+              this.app_service.deleteAnomalie(idA).subscribe();
+            }
+  
+            Swal.fire({
+              title: 'Supprimé !',
+              text: successMessage,
+              icon: 'success'
+            });
             this.getAllTicket(this.id);
-      }
-      else if((idC===null && idA!==null)){
-        this.app_service.deleteTicket(id)
-            .subscribe({
-              next:(_res) =>{
-                this.app_service.deleteAnomalie(idC)
-                .subscribe({
-                  next:(_value) =>{
-                    
-                  },
-                })
-              },
-            })
-            alert("Ticket, Anomalies supprimés avec succès!!!");
-            this.getAllTicket(this.id);
-      }
-      else{
-        this.app_service.deleteTicket(id)
-        .subscribe({
-          next:(_res) =>{
-              alert("Ticket supprimé avec succès!!!");
-              this.getAllTicket(this.id);
           },
-          error:()=>{
+          error: () => {
+            Swal.fire({
+              title: 'Oups !',
+              text: errorMessage,
+              icon: 'error'
+            });
             this.getAllTicket(this.id);
           }
-        })
-        alert("Ticket supprimé avec succès!!!");
-        this.getAllTicket(this.id);
+        });
       }
+    });
   }
+  
 
   // Partie Anomalie
   getAllAnomalie(){
@@ -196,13 +193,40 @@ export class DetailReleaseComponent implements OnInit {
     })
   }
 
-  deleteAnomalie(id: number){
-    this.app_service.deleteAnomalie(id)
-    .subscribe({
-      next:(_res) =>{
-          this.getAllAnomalie();
-      },
-    })
+ 
+  
+  deleteAnomalie(id: number) {
+    Swal.fire({
+      title: 'Voulez-vous vraiment supprimer cette anomalie ?',
+      text: 'L\'anomalie sera définitivement supprimée !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer !'
+    }).then((result) => {
+      if (result.value) {
+        this.app_service.deleteAnomalie(id).subscribe({
+          next: (_res) => {
+            Swal.fire({
+              title: 'Supprimée !',
+              text: 'L\'anomalie a été supprimée avec succès.',
+              icon: 'success'
+            });
+            this.getAllAnomalie();
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Oups !',
+              text: 'Impossible de supprimer cette anomalie.',
+              icon: 'error'
+            });
+            this.getAllAnomalie();
+          }
+        });
+      }
+    });
   }
+  
   
 }

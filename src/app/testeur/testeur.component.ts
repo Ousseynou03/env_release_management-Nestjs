@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-
+import Swal from 'sweetalert2';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AppSessionService } from 'app/services/app-session.service';
@@ -79,18 +79,37 @@ export class TesteurComponent implements OnInit {
     })
   }
 
-  deleteTesteur(id: number){
-    this.app_service.deleteTesteur(id)
-    .subscribe({
-      next:(_res)=>{
-        alert("Testeur supprimer avec succes");
-        this.getAllTesteur();
-      },
-      error:(error)=>{
-        alert("Impossible de supprimer ce testeur");
-        this.getAllTesteur();
+  deleteTesteur(id: number) {
+    Swal.fire({
+      title: 'Voulez-vous vraiment supprimer ce testeur ?',
+      text: 'Le testeur sera définitivement supprimé!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+        this.app_service.deleteTesteur(id)
+          .subscribe({
+            next: (_res) => {
+              Swal.fire({
+                title: 'Supprimé!',
+                text: 'Le testeur a été supprimé avec succès.',
+                icon: 'success'
+              });
+              this.getAllTesteur();
+            },
+            error: (error) => {
+              Swal.fire({
+                title: 'Oups!',
+                text: 'Impossible de supprimer ce testeur.',
+                icon: 'error'
+              });
+              this.getAllTesteur();
+            }
+          });
       }
-    })
+    });
   }
 }
-

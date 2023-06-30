@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../../../testeur/dialog/dialog/dialog.component';
 import { AppSessionService } from '../../../services/app-session.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dialog-edit',
@@ -33,18 +34,30 @@ export class DialogEditComponent implements OnInit {
     }
   }
 
-  updateRelease(){
+
+
+  
+  updateRelease(): void {
     this.app_service.putRelease(this.FormGroup1.value, this.editData.refRelease)
-    .subscribe({
-      next:(res)=>{
-        alert("Release Modifier avec Succes");
-        this.FormGroup1.reset();
-        this.dialogRef.close('update');
-      },
-      error:()=>{
-        alert("Impossible de modifier ce release");
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          Swal.fire({
+            title: 'Modifié !',
+            text: 'La release a été modifiée avec succès.',
+            icon: 'success'
+          });
+          this.FormGroup1.reset();
+          this.dialogRef.close('update');
+        },
+        error: () => {
+          Swal.fire({
+            title: 'Oups !',
+            text: 'Impossible de modifier cette release.',
+            icon: 'error'
+          });
+        }
+      });
   }
+  
 
 }

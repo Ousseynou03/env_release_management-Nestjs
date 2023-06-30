@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DialogEditComponent } from './dialog/dialog-edit/dialog-edit.component';
 import { PerimetreDialogComponent } from './dialog/perimetre-dialog/perimetre-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perimetre',
@@ -59,17 +60,38 @@ export class PerimetreComponent implements OnInit {
   }
 
 
-  deleteRelease(refRelease: number){
-    this.app_service.deleteRelease(refRelease)
-    .subscribe({
-      next:(value) =>{
-          alert("Release Supprimer avec Succès");
-          this.getAllPerimetre();
-      },
-      error(err) {
-          alert("Impossible de Supprimer cette Release");
-      },
-    })
+
+  deleteRelease(refRelease: number) {
+    Swal.fire({
+      title: 'Voulez-vous vraiment supprimer cette release ?',
+      text: 'La release sera définitivement supprimée !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer !'
+    }).then((result) => {
+      if (result.value) {
+        this.app_service.deleteRelease(refRelease)
+          .subscribe({
+            next: (value) => {
+              Swal.fire({
+                title: 'Supprimée !',
+                text: 'La release a été supprimée avec succès.',
+                icon: 'success'
+              });
+              this.getAllPerimetre();
+            },
+            error: (err) => {
+              Swal.fire({
+                title: 'Oups !',
+                text: 'Impossible de supprimer cette release.',
+                icon: 'error'
+              });
+            },
+          });
+      }
+    });
   }
 
   editDialog(row : any) {

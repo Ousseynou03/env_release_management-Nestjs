@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { AppSessionService } from '../../../../../../services/app-session.service';
 import { DetailScenarioDialogComponent } from '../detail-scenario-dialog/detail-scenario-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-scenario-test-dialog',
@@ -70,18 +71,44 @@ export class ScenarioTestDialogComponent implements OnInit {
       }
     }
   
-    deleteScenario(id : number):void{
-      this.app_service.deleteScenario(id)
-      .subscribe({
-        next:(value) =>{
-            alert("Scénario supprimer avec succèss!!!");
-            this.getAllScenario(this.refCasTest);
-        },error:(err) =>{
-            this.getAllScenario(this.refCasTest);
-        },
-      })
+   
+
+    // ...
+    
+    deleteScenario(id: number): void {
+      Swal.fire({
+        title: 'Voulez-vous vraiment supprimer ce scénario ?',
+        text: 'Le scénario sera définitivement supprimé !',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimer !'
+      }).then((result) => {
+        if (result.value) {
+          this.app_service.deleteScenario(id)
+            .subscribe({
+              next: (value) => {
+                Swal.fire({
+                  title: 'Supprimé !',
+                  text: 'Le scénario a été supprimé avec succès.',
+                  icon: 'success'
+                });
+                this.getAllScenario(this.refCasTest);
+              },
+              error: (err) => {
+                Swal.fire({
+                  title: 'Oups !',
+                  text: 'Impossible de supprimer ce scénario.',
+                  icon: 'error'
+                });
+                this.getAllScenario(this.refCasTest);
+              }
+            });
+        }
+      });
     }
-  
+    
     openDialog() {
       this.dialog.open(DetailScenarioDialogComponent, {
         width: '50%'
