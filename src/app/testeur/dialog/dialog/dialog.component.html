@@ -1,26 +1,35 @@
-<h2 mat-dialog-title>Nouveau Testeur</h2>
+<h2 mat-dialog-title style="color: cornflowerblue;">Nouveau Testeur</h2>
 
 <mat-dialog-content class="mat-typography">
     <form action="" [formGroup]="testeurForm">
-        <mat-form-field class="example-full-width">
-            <mat-label>Matricule</mat-label>
-            <input matInput placeholder="2015075AI" name="matricule" id="matricule" formControlName="matricule">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Nom</mat-label>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+    
+            </thead>
+            <tbody>
+              <tr style="color: cornflowerblue;">
+                <td>
+                  <mat-label>Matricule</mat-label>
+                  <input matInput placeholder="2015075AI" name="matricule" id="matricule" formControlName="matricule">
+                </td>
+                <td>
+                  <mat-label>Nom</mat-label>
           <input matInput placeholder="Ex. Coundoul"  formControlName="nom" required>
-      </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Prénom</mat-label>
-          <input matInput placeholder="Ex. Ousseynou"  formControlName="prenom" required>
-        </mat-form-field>
+                </td>
+                <td>
+                  <mat-label>Prénom</mat-label>
+                  <input matInput placeholder="Ex. Ousseynou"  formControlName="prenom" required>
+                </td>
+            
+            </tbody>
+          </table>
+        </div>
     
     </form>
 
 </mat-dialog-content>
 <mat-dialog-actions class="custom-align">
-  <button mat-fab extended  color="accent" mat-dialog-close>Annuler</button>
+  <button mat-fab extended  mat-dialog-close>Annuler</button>
   <button mat-fab extended  color="primary"  [mat-dialog-close]="true" cdkFocusInitial (click)="addTesteur()">{{actionBtn}}</button>
 </mat-dialog-actions>

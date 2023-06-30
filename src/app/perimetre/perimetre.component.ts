@@ -20,26 +20,21 @@ export class PerimetreComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  tickets!: [];
-
   constructor(private app_service: AppSessionService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllPerimetre();
   }
 
-
-
   ngAfterViewInit() {
-    if(this.paginator === undefined){
+    if (this.dataSource) {
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -54,12 +49,10 @@ export class PerimetreComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error:(_err)=>{
-        alert("Impossible de recupere la liste des releases!!!")
+        alert("Impossible de récupérer la liste des releases!!!");
       }
-    })
+    });
   }
-
-
 
   deleteRelease(refRelease: number) {
     Swal.fire({
@@ -94,13 +87,12 @@ export class PerimetreComponent implements OnInit {
     });
   }
 
-  editDialog(row : any) {
+  editDialog(row: any) {
     this.dialog.open(DialogEditComponent, {
       width: '50%',
       data: row
     }).afterClosed().subscribe(()=>{
-        this.getAllPerimetre();
-      
+      this.getAllPerimetre();
     });
   }
 
@@ -109,7 +101,6 @@ export class PerimetreComponent implements OnInit {
       width: '60%'
     }).afterClosed().subscribe(()=>{
       this.getAllPerimetre();
-      
     });
   }
 }

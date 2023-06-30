@@ -35,13 +35,11 @@ export class Indisponibilite {
     get_enum(property) {
         switch (property) {
             case 'environment':
-                return EnvEnum;
-            
+                return EnvEnum;           
             case 'liste_app':
                 return ListApp;
             case 'niveau_test':
                 return NivTest;
-
             case 'impact_env':
                 return Impact;
             case 'momment':
