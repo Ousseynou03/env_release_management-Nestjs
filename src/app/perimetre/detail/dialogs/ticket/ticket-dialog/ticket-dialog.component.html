@@ -1,72 +1,3 @@
-<!--
-<div class="container-fluide page">
-    <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
-    <div class="page_content shadow p-3 position-relative">
-        <div class="page_content-data position-absolute text-center"></div>
-          
-        
-        <div class="container">
-            <div class="mt-2">
-                <mat-stepper >
-
-                    <mat-step [stepControl]="FormGroup2">
-    
-                        <ng-template matStepLabel>Ticket</ng-template>
-                        <form [formGroup]="FormGroup2" class="mt-4">
-
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Titre Ticket</mat-label>
-                                <input matInput placeholder="Titre 1" formControlName="titre" required>
-                            </mat-form-field>
-
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Type</mat-label>
-                                <mat-select formControlName="type" required>
-                                  <mat-option value="ANOMALIE">Anomalie</mat-option>
-                                  <mat-option value="EVOLUTION">Evolution</mat-option>
-                                  <mat-option value="INCIDENT">Incident</mat-option>
-                                  <mat-option value="RECIT">Recit</mat-option>
-                                  <mat-option value="HORS_RELEASE">Hors Release</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Testeur</mat-label>
-                                <mat-select formControlName="testeur" required>
-                                  <mat-option value=""></mat-option>
-                                  <mat-option *ngFor="let testeur of listTesteur" [value]="testeur">{{testeur.prenom}} {{testeur.nom}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Release</mat-label>
-                                <mat-select formControlName="release" required>
-                                  <mat-option [value]="listRelease">{{listRelease.nomRelease}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </form>
-                        <mat-toolbar style="background-color: white;"> 
-                            <span class="example-spacer"></span>
-                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" mat-dialog-close>
-                                Close
-                            </button>
-                            |
-                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="addTicket()">
-                                Envoyer
-                            </button>
-                        </mat-toolbar>
-                    </mat-step>
-                
-                    
-                </mat-stepper>
-            </div>
-        </div>
-    </div>
-    
-</div>
--->
-
 <div class="container-fluide page">
     <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
     <div class="page_content shadow p-3 position-relative">
@@ -75,7 +6,7 @@
       <div class="container">
         <div class="mt-2 stepper-wrapper">
           <div class="step" [class.active]="currentStepIndex === 0">
-            <h4 class="step-title">Ticket</h4>
+            <h4 class="step-title" style="color: rgb(1, 111, 182);">Ticket</h4>
             <ng-template matStepLabel>Ticket</ng-template>
             <form [formGroup]="FormGroup2" class="mt-4">
 
@@ -113,7 +44,7 @@
             </form>
             <div class="step-buttons">
               <button class="btn btn-secondary" color="primary" ria-label="Example icon-button with share icon" mat-dialog-close>Annuler</button>
-              <button class="btn btn-primary" (click)="nextStep()">Envoyer</button>
+              <button class="btn btn-primary" (click)="nextStep()" style="margin-left: 20px;color: rgb(1, 111, 182);">Envoyer</button>
             </div>
           </div>
   

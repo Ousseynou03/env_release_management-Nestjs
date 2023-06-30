@@ -44,6 +44,10 @@ export class TesteurComponent implements OnInit {
     }
   }
 
+  numLigne: number = 1;
+  ajouterEntree() {
+    this.numLigne++;
+  }
   openDialog() {
     this.dialog.open(DialogComponent, {
       width: '50%'

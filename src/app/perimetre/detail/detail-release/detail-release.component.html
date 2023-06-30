@@ -1,122 +1,207 @@
-<div class="container-fluide page">
-    <div class="page_box p-3 mt-2" style="color: cornflowerblue; height: 50px; margin-top: 15px;" >Détail Release {{ info }}</div>
+
+<!--
+      <div class="container-fluid page">
+        <div class="page_box p-3 mt-2" style="color: rgb(1, 111, 182); height: 50px; margin-top: 15px;">Détail Release {{ info }}</div>
+        <div class="page_content shadow p-3 position-relative">
+      
+          
+          <div class="container-fluid mb-3">
+            <div class="btn-toolbar justify-content-end" role="toolbar">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" [routerLink]="['', id, info, 'dashboard']" style="margin-right: 30px; margin-bottom: 20px;">
+                  <i class="bi bi-speedometer"></i>
+                  Dashboard
+                </button>
+                <button type="button" class="btn btn-primary" (click)="ajoutDialogTicket(id)" style="margin-right: 30px; margin-bottom: 20px;">
+                  <i class="bi bi-plus"></i>
+                  Ticket
+                </button>
+                <button type="button" class="btn btn-primary" (click)="ajoutDialogaCasTest(id)" style="margin-right: 30px; margin-bottom: 20px;"> 
+                  <i class="bi bi-plus"></i>
+                  Cas De Test
+                </button>
+                <button type="button" class="btn btn-primary" (click)="ajoutDialogAnomalie(id)" style="margin-right: 30px; margin-bottom: 20px;">
+                  <i class="bi bi-plus"></i>
+                  Anomalie
+                </button>
+              </div>
+            </div>
+          </div>
+      
+          
+          <div class="container mt-2">
+            <div class="mb-3"><span style="color: black;">Rechercher</span>
+              <input type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead class="bg-limegreen text-white">
+                  <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Prise en Charge</th>
+                    <th scope="col">Résultat</th>
+                    <th scope="col">Scénario Test</th>
+                    <th scope="col">Clôturée</th>
+                    <th scope="col">Criticité</th>
+                    <th scope="col">En Cours</th>
+                    <th scope="col">Priorité</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of dataSourceTicket.data" style="color: rgb(1, 111, 182);">
+                    <td>{{ row.titre }}</td>
+                    <td>{{ row.type }}</td>
+                    <td>{{ row.testeur?.prenom }} {{ row.testeur?.nom }}</td>
+                    <td>{{ row?.casDeTest?.resultat }}</td>
+                    <td>
+                      <button class="btn btn-link" [routerLink]="['', row?.casDeTest?.refCasTest, row?.casDeTest?.resultat, 'detailCasTest']">
+                        <i class="bi bi-eye"></i>
+                      </button>
+                    </td>
+                    <td>{{ row.anomalies?.cloturee }}</td>
+                    <td>{{ row.anomalies?.criticite }}</td>
+                    <td>{{ row.anomalies?.enCours }}</td>
+                    <td>{{ row.anomalies?.priorite }}</td>
+                    <td>{{ row.anomalies?.statut }}</td>
+                    <td>
+                      <button class="btn btn-link text-primary" (click)="editTicket(row)">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-link text-danger" (click)="deleteTicket(row.refTicket)">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                        </td>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsTicket"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsTicket;"></tr>
+                  
+                      
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                      </tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" style="margin-bottom: 500px;"></mat-paginator>
+                  </div>
+            </div>
+        </div>
+
+    </div>
+  -->
+  <div class="container-fluid page">
+    <div class="page_box p-3 mt-2" style="color: rgb(1, 111, 182); height: 50px; margin-top: 15px;">Détail Release {{ info }}</div>
     <div class="page_content shadow p-3 position-relative">
 
-      <mat-toolbar style="background-color: white;">
-        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" [routerLink]="['' ,id, info, 'dashboard']">
-          <mat-icon>dashboard</mat-icon>
-          Dashboard
-        </button>
-        <span class="example-spacer"></span>
-        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogTicket(id)">
-          <mat-icon>add</mat-icon>
-          Ticket
-        </button>
-        <span class="example-spacer"></span>
-        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogaCasTest(id)">
-          <mat-icon>add</mat-icon>
-          Cas De Test
-        </button>
-        <span class="example-spacer"></span>
-        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogAnomalie(id)">
-          <mat-icon>add</mat-icon>
-          Anomalie
-        </button>
+      <button type="button" class="btn btn-primary" [routerLink]="['', id, info, 'dashboard']" style="margin-right: 30px; margin-bottom: 20px;">
+        <i class="bi bi-speedometer"></i>
+        Dashboard
+      </button>
+      <button type="button" class="btn btn-primary" (click)="ajoutDialogTicket(id)" style="margin-right: 30px; margin-bottom: 20px;">
+        <i class="bi bi-plus"></i>
+        Ticket
+      </button>
+      <button type="button" class="btn btn-primary" (click)="ajoutDialogaCasTest(id)" style="margin-right: 30px; margin-bottom: 20px;"> 
+        <i class="bi bi-plus"></i>
+        Cas De Test
+      </button>
+      <button type="button" class="btn btn-primary" (click)="ajoutDialogAnomalie(id)" style="margin-right: 30px; margin-bottom: 20px;">
+        <i class="bi bi-plus"></i>
+        Anomalie
+      </button>
         
         <span class="example-spacer"></span>
-        <!-- <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" routerLink="/managerTesting">
-          <mat-icon>add</mat-icon>
-          Scénario De Test
-        </button>
-          <span class="example-spacer"></span> -->
-      </mat-toolbar>
-
+   
         <div class="container">
             <div class="mt-2">
                 <mat-form-field>
                     <mat-label>Rechercher</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input style="color: black;">
                   </mat-form-field>
-                  
+
+                  <div class="table-responsive">
                   <div class="mat-elevation-z8">
-                    <table mat-table [dataSource]="dataSourceTicket" matSortTicket>
+
+                    <table mat-table [dataSource]="dataSourceTicket" matSortTicket class="table table-striped table-hover">
 
                       <!-- Matricule Column -->
-                      <ng-container matColumnDef="titre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: limegreen;"> Titre </th>
-                        <td mat-cell *matCellDef="let row"> {{row.titre}} </td>
-                      </ng-container>
+                      <tr matColumnDef="titre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Titre </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);"> {{row.titre}} </td>
+                      </tr>
                       
 
                       <!-- Matricule Column -->
-                      <ng-container matColumnDef="type">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: limegreen;"> Type </th>
-                        <td mat-cell *matCellDef="let row"> {{row.type}} </td>
-                      </ng-container>
+                      <tr matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Type </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);"> {{row.type}} </td>
+                      </tr>
                   
                       <!-- Nom Column -->
-                      <ng-container matColumnDef="testeur">
+                      <tr matColumnDef="testeur">
                         <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Prise en Chage </th>
-                        <td mat-cell *matCellDef="let row"> {{row.testeur?.prenom}} {{row.testeur?.nom}} </td>
-                      </ng-container>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);"> {{row.testeur?.prenom}} {{row.testeur?.nom}} </td>
+                      </tr>
 
                        <!-- Nom Column -->
-                       <ng-container matColumnDef="casTest">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color:bisque;"> Resultat </th>
-                        <td mat-cell *matCellDef="let row">{{row?.casDeTest?.resultat}} </td>
-                      </ng-container>
+                       <tr matColumnDef="casTest">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Resultat </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);">{{row?.casDeTest?.resultat}} </td>
+                      </tr>
 
                        <!-- Nom Column -->
-                       <ng-container matColumnDef="scenario">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color:bisque;"> Scénario Test </th>
-                        <td mat-cell *matCellDef="let row">
+                       <tr matColumnDef="scenario">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Scénario Test </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);">
                           <button mat-icon-button [routerLink]="['' , row?.casDeTest?.refCasTest, row?.casDeTest?.resultat, 'detailCasTest']">
                             <mat-icon>visibility</mat-icon>
                         </button>
                         </td>
-                      </ng-container>
+                      </tr>
 
-                      <ng-container matColumnDef="cloture">
+                      <tr matColumnDef="cloture">
                         <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Cloturée </th>
-                        <td mat-cell *matCellDef="let row"> {{row.anomalies?.cloturee}}</td>
-                      </ng-container>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);"> {{row.anomalies?.cloturee}}</td>
+                      </tr>
 
-                      <ng-container matColumnDef="criticite">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Criticité </th>
-                        <td mat-cell *matCellDef="let row">{{row.anomalies?.criticite}}</td>
-                      </ng-container>
+                      <tr matColumnDef="criticite">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Criticité </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);">{{row.anomalies?.criticite}}</td>
+                      </tr>
 
-                      <ng-container matColumnDef="cours">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> En Cours </th>
-                        <td mat-cell *matCellDef="let row" style="margin-right: 10px;">{{row.anomalies?.enCours}}</td>
-                      </ng-container>
+                      <tr matColumnDef="cours">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > En Cours </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);">{{row.anomalies?.enCours}}</td>
+                      </tr>
 
-                      <ng-container matColumnDef="priorite">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> Priorité </th>
-                        <td mat-cell *matCellDef="let row">{{row.anomalies?.priorite}}</td>
-                      </ng-container>
+                      <tr matColumnDef="priorite">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Priorité </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);">{{row.anomalies?.priorite}}</td>
+                      </tr>
 
-                      <ng-container matColumnDef="statut">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket style="background-color: red;"> Statut </th>
-                        <td mat-cell *matCellDef="let row">{{row.anomalies?.statut}}</td>
-                      </ng-container>
+                      <tr matColumnDef="statut">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-ticket > Statut </th>
+                        <td mat-cell *matCellDef="let row" style="color: rgb(1, 111, 182);">{{row.anomalies?.statut}}</td>
+                      </tr>
 
                        <!-- Action Column -->
-                       <ng-container matColumnDef="action">
+                       <tr matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Action </th>
                         <td mat-cell *matCellDef="let row">
 
-                          <button class="btn btn-primary btn-sm" (click)="editDialogTicket(row, row.release.refRelease, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
-                            <i class="fa fa-edit"></i>
-                          </button>
-                          <button class="btn btn-danger btn-sm btn-outline-danger" (click)="deleteTicket(row.refTicket, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                          
+            
+                          <div class="step-buttons">
+                            <button class="btn btn-primary" (click)="editDialogTicket(row, row.release.refRelease, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)"> <i class="bi bi-pencil" style="border: none;"></i></button>
+                            <button class="btn btn-danger" (click)="deleteTicket(row.refTicket, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
+                              <i class="bi bi-trash" style="border: none;"></i>
+                            </button>
+                            
+                          </div>
 
                         </td>
 
-                      </ng-container>
+                      </tr>
                   
                       <tr mat-header-row *matHeaderRowDef="displayedColumnsTicket"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumnsTicket;"></tr>
@@ -130,6 +215,6 @@
                   </div>
             </div>
         </div>
-
+      </div>
     </div>
 </div>

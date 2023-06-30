@@ -63,6 +63,8 @@ export class PerimetreDialogComponent implements OnInit {
   });
   
   isLinear = false;
+  currentStepIndex = 0;
+
 
 
   constructor(private app_service: AppSessionService,
@@ -77,6 +79,22 @@ export class PerimetreDialogComponent implements OnInit {
       .subscribe(response => {
         this.listTesteur = response;
       });
+  }
+
+  prevStep() {
+    this.currentStepIndex--;
+  }
+
+  nextStep() {
+    if (this.currentStepIndex < this.totalSteps() - 1) {
+      this.currentStepIndex++;
+    } else {
+      this.addManager();
+    }
+  }
+
+  totalSteps() {
+    return 1;
   }
  
   

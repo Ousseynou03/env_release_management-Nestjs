@@ -5,9 +5,8 @@
 
       <mat-toolbar style="background-color: white;">
           <span class="example-spacer"></span>
-          <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="openDialogManager()">
-            <mat-icon>add</mat-icon>
-            Ajouter
+          <button class="btn btn-primary" (click)="openDialogManager()" style="margin-left: 800px; margin-top: 30px;color: rgb(1, 111, 182);">
+            <i class="bi bi-plus" style="width: 100px;"></i> Ajouter une release
           </button>
       </mat-toolbar>
 
@@ -36,7 +35,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of dataSource?.data" style="color: cornflowerblue;">
+              <tr *ngFor="let row of dataSource?.data" style="color: rgb(1, 111, 182);">
                 <td>RPP-{{row.refRelease}}</td>
                 <td>{{row.nomRelease}}</td>
                 <td>{{row.dateLivraison | date:'shortDate'}}</td>

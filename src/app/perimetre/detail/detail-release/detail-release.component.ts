@@ -100,7 +100,7 @@ export class DetailReleaseComponent implements OnInit {
   ajoutDialogAnomalie(id: number){ 
     this.dialog.open(AnomalieDialogComponent, {
       data:{id},
-      width: '50%',
+      width: '60%',
     }).afterClosed().subscribe(()=>{
       this.getAllTicket(this.id);
       
@@ -110,7 +110,7 @@ export class DetailReleaseComponent implements OnInit {
   ajoutDialogaCasTest(id: number){ 
     this.dialog.open(CasTestDialogComponent, {
       data:{id},
-      width: '50%',
+      width: '30%',
     }).afterClosed().subscribe(()=>{
       this.getAllTicket(this.id);
       

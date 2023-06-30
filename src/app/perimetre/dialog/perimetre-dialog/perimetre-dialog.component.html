@@ -1,3 +1,4 @@
+<!--
 <div class="container">
   <div class="mt-2">
       <mat-stepper [linear]="isLinear"  #stepper>
@@ -162,3 +163,46 @@
       </mat-stepper>
   </div>
 </div>
+-->
+<div class="container-fluide page">
+    <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
+    <div class="page_content shadow p-3 position-relative">
+      <div class="page_content-data position-absolute text-center"></div>
+    
+      <div class="container">
+        <div class="mt-2 stepper-wrapper">
+          <div class="step" [class.active]="currentStepIndex === 0">
+        
+            <ng-template matStepLabel style="color: rgb(1, 111, 182);">Release</ng-template>
+            <form [formGroup]="FormGroup1" class="mt-4">
+                <div class="mb-3">
+                  <label for="nomRelease" class="form-label" style="color: rgb(1, 111, 182);">Nom Release</label>
+                  <input type="text" class="form-control" id="nomRelease" placeholder="Projet 1" formControlName="nomRelease" required>
+                </div>
+              
+                <div class="mb-3">
+                  <label for="dateLivraison" class="form-label" style="color: rgb(1, 111, 182);">Choisir Date Livraison</label>
+                  <input type="date" class="form-control" id="dateLivraison" placeholder="MM/DD/YYYY" formControlName="dateLivraison">
+                </div>
+              
+                <div class="mb-3">
+                  <label for="datePrevision" class="form-label" style="color: rgb(1, 111, 182);">Choisir Date Prévision</label>
+                  <input type="date" class="form-control" id="datePrevision" placeholder="MM/DD/YYYY" formControlName="datePrevision">
+                </div>
+              
+                <div class="mb-3">
+                  <label for="dateReelle" class="form-label" style="color: rgb(1, 111, 182);">Choisir Date Réelle</label>
+                  <input type="date" class="form-control" id="dateReelle" placeholder="MM/DD/YYYY" formControlName="dateReelle">
+                </div>
+              </form>
+              
+            <div class="step-buttons">
+              <button class="btn btn-secondary" color="primary" ria-label="Example icon-button with share icon" mat-dialog-close>Annuler</button>
+              <button class="btn btn-primary" (click)="addManager()" style="margin-left: 20px;color: rgb(1, 111, 182);">Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
