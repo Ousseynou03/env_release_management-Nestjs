@@ -19,6 +19,7 @@ export class DialogEditComponent implements OnInit {
     dateReelle: [null]
   });
   
+  
 
   constructor(@Inject(MAT_DIALOG_DATA) public editData : any, 
   private dialogRef : MatDialogRef<DialogComponent>,

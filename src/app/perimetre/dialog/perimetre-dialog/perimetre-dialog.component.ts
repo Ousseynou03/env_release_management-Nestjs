@@ -64,6 +64,7 @@ export class PerimetreDialogComponent implements OnInit {
   
   isLinear = false;
 
+
   constructor(private app_service: AppSessionService,
     private _formBuilder: FormBuilder,
     public router : Router, private route: ActivatedRoute,  
@@ -78,7 +79,7 @@ export class PerimetreDialogComponent implements OnInit {
       });
   }
  
-
+  
 
   addManager() {
     this.app_service.postRelease(this.FormGroup1.value).subscribe({

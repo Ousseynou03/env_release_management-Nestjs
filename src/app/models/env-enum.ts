@@ -42,7 +42,9 @@ export enum Cause {
 export enum Impact {
     qualite = 'Qualité: réduction du périmètre de tests',
     delai = 'Délai: décalage de la fin de la recette',
-    charge = 'Charge',
+    charge_embauche = 'Charge: embauche de nouvelles ressources',	
+    charge_weekEnd = 'Charge: travail le week-end',	
+    charge_etude = 'Charge: étude d\'une nouvelle organisation des tests',	
     pas_impact = 'Pas d\'impact', 
 
 }

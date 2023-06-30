@@ -253,10 +253,11 @@
                                     <span *ngIf="data.isEnum">
                                         <label>{{data.label}} </label>
                                         <select formControlName="{{data.label}}" class="form-control">
-                                          <option [ngValue]="null" disabled>Choisir un environnement</option>
+                                          <option [ngValue]="null" disabled>Choisir</option>
                                           <option *ngFor="let prf of data.enum" [ngValue]="prf">
                                            {{ prf }}
                                           </option>
+                                          
                                         </select>
                                     </span>
                                     <span *ngIf="!data.isEnum">
