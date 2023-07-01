@@ -11,6 +11,10 @@ export class Indisponibilite {
     createdAt : Date
     commentaires : string
     cause : Cause
+    dureeTotale: number;
+    dureeEffective: number;
+    nbRessources: number;
+    cumuleGH: number;
 
     constructor() {
         this.environment = EnvEnum.prod;
@@ -20,7 +24,10 @@ export class Indisponibilite {
         this.momment = Momment.installation_init;
         this.cause = Cause.attente_liv_correctiuon;
         this.commentaires = '';
-        this.createdAt = new Date();
+        this.dureeTotale = 0;
+        this.dureeEffective = 0;
+        this.nbRessources = 0;
+        this.cumuleGH = 0;
       
     }
 

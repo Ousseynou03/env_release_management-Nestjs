@@ -266,16 +266,15 @@
                                                placeholder="{{data.label}}" type="{{data.type}}" required="true">
                                     </span>
                                     </div>
+                                    
+                                    </div>                                   
+                                    <button *ngIf="formData.length !== 0" [disabled]="ind_form.invalid"
+                                                class="btn btn-info btn-fill pull-right"
+                                                type="submit">Valider
+                                    </button>
+                                    <div class="clearfix"></div>
+                                    </form>
                                     </div>
-
-                                                <button *ngIf="formData.length !== 0" [disabled]="ind_form.invalid"
-                                                        class="btn btn-info btn-fill pull-right"
-                                                        type="submit">Valider
-                                                </button>
-                                                <div class="clearfix"></div>
-                                            </form>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -303,32 +302,15 @@
                                           </option>
                                         </select>
                                     </span>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                          <label for="total-duration">Durée Totale (h)</label>
-                                          <input type="number" id="total-duration" class="form-control" step="0.01" />
-                                        </div>
-                                        <div class="form-group">
-                                          <label for="effective-duration">Durée Effective (h)</label>
-                                          <input type="number" id="effective-duration" class="form-control" step="0.01" />
-                                        </div>
-                                        <div class="form-group">
-                                          <label for="resource-count">Nb ressources</label>
-                                          <input type="number" id="resource-count" class="form-control" step="0.01" />
-                                        </div>
-                                        <div class="form-group">
-                                          <label for="cumulative-duration">Cumulée G*h</label>
-                                          <input type="number" id="cumulative-duration" class="form-control" step="0.01" />
-                                        </div>
-                                      </div>
+                              
                                     <span *ngIf="!data.isEnum">
                                         <label>{{data.label}} </label>
                                         <input class="form-control" formControlName="{{data.label}}"
                                                placeholder="{{data.label}}" type="{{data.type}}" required="true">
                                     </span>
-                                                    </div>
+                                    
+                                    </div>
                                                 </div>
-
                                                 <button *ngIf="formData.length !== 0"
                                                         class="btn btn-info btn-fill pull-right"
                                                         type="submit">Valider
