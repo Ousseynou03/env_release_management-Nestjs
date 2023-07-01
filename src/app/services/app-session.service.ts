@@ -137,7 +137,7 @@ export class AppSessionService extends BaseService {
   }
 
   setSession(authResult) {
-    const expiresAt = moment().add(authResult.expiresIn, 'second');
+    const expiresAt = moment().add(authResult.expiresIn, 'minutes');
     localStorage.setItem('profile', JSON.stringify(Profile.user));
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );

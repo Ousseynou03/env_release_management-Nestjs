@@ -16,7 +16,7 @@ import { DetailReleaseComponent } from 'app/perimetre/detail/detail-release/deta
 import { ScenarioTestDialogComponent } from 'app/perimetre/detail/dialogs/scenario-test/detail-scenario/scenario-test-dialog/scenario-test-dialog.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: HomeComponent },
+    { path: 'dashboard',      component: HomeComponent, canActivate : [UserGuardService] },
     { path: 'environments',    component: EnvironmentsComponent, canActivate: [UserGuardService] },
     { path: 'environmentDetail/:id',    component: EnvironmentDetailComponent, canActivate: [UserGuardService] },
     { path: 'planningDetail/:id', component: PlanningDetailComponent, canActivate: [UserGuardService] },

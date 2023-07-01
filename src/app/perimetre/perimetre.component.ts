@@ -26,15 +26,17 @@ export class PerimetreComponent implements OnInit {
     this.getAllPerimetre();
   }
 
+
   ngAfterViewInit() {
-    if (this.dataSource) {
+    if(this.paginator === undefined){
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     }
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -49,50 +51,32 @@ export class PerimetreComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error:(_err)=>{
-        alert("Impossible de récupérer la liste des releases!!!");
+        alert("Impossible de recupere la liste des releases!!!")
       }
-    });
+    })
   }
 
-  deleteRelease(refRelease: number) {
-    Swal.fire({
-      title: 'Voulez-vous vraiment supprimer cette release ?',
-      text: 'La release sera définitivement supprimée !',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimer !'
-    }).then((result) => {
-      if (result.value) {
-        this.app_service.deleteRelease(refRelease)
-          .subscribe({
-            next: (value) => {
-              Swal.fire({
-                title: 'Supprimée !',
-                text: 'La release a été supprimée avec succès.',
-                icon: 'success'
-              });
-              this.getAllPerimetre();
-            },
-            error: (err) => {
-              Swal.fire({
-                title: 'Oups !',
-                text: 'Impossible de supprimer cette release.',
-                icon: 'error'
-              });
-            },
-          });
-      }
-    });
+
+  deleteRelease(refRelease: number){
+    this.app_service.deleteRelease(refRelease)
+    .subscribe({
+      next:(value) =>{
+          alert("Release Supprimer avec Succès");
+          this.getAllPerimetre();
+      },
+      error(err) {
+          alert("Impossible de Supprimer cette Release");
+      },
+    })
   }
 
-  editDialog(row: any) {
+  editDialog(row : any) {
     this.dialog.open(DialogEditComponent, {
       width: '50%',
       data: row
     }).afterClosed().subscribe(()=>{
-      this.getAllPerimetre();
+        this.getAllPerimetre();
+      
     });
   }
 
@@ -101,6 +85,7 @@ export class PerimetreComponent implements OnInit {
       width: '60%'
     }).afterClosed().subscribe(()=>{
       this.getAllPerimetre();
+      
     });
   }
 }

@@ -3,6 +3,8 @@
 
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 
+@import '~chartist/dist/chartist.min.css';
+
 
 
 .modal-backdrop.fade {

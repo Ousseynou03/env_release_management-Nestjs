@@ -54,33 +54,6 @@ export class AuthentificationComponent implements OnInit {
               'error'
           ).then();
         });
-
-/*    this.api_service.signInUser(formValue).then(() => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Bienvenue.',
-            showConfirmButton: false,
-            timer: 1500
-          }).then();
-          this.router.navigate(['']);
-        },
-        (error) => {
-          let message: string;
-          if (error.code === 'auth/user-not-found') {
-            message = 'Adresse Email invalide!';
-          } else if (error.code === 'auth/wrong-password') {
-            message = 'Mot de passe incorrecte!';
-          } else if (error.code === 'userNotActived') {
-            message = 'Votre compte a été désactivé. Veuillez contacter l\'administrateur!';
-          } else {
-            message = 'Une erreur est ssurvenue. Veuillez réessayer svp!';
-          }
-          Swal.fire(
-              'Oups!',
-              message,
-              'error'
-          ).then();
-        });*/
   }
 
 }
