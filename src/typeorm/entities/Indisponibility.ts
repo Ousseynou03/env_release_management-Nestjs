@@ -42,7 +42,7 @@ export class Indisponibility {
     
     
     @Column({ nullable : true })
-    cumuleGH: string;
+    cumuleGH: number;
 
 
     
