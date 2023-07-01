@@ -6,12 +6,13 @@ import {
     UpdateIndisponibilityParams,
 } from '../../../utils/types';
 import { Indisponibility } from '../../../typeorm/entities/Indisponibility';
+import { IndisponibilityRepository } from '../../../indisponibilities/repository/indisponibility.repository';
 
 @Injectable()
 export class IndisponibilitiesService {
     constructor(
         @InjectRepository(Indisponibility)
-        private indisponibilityRepository: Repository<Indisponibility>,
+        private indisponibilityRepository: IndisponibilityRepository,
     ) {}
 
     findIndisponibilities() {

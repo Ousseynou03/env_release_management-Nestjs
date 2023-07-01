@@ -1,4 +1,4 @@
-import {BadRequestException, Body, Controller, Get, Post, Req, Res, UnauthorizedException} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Get, Logger, Post, Req, Res, UnauthorizedException} from '@nestjs/common';
 import {UsersService} from '../../services/users/users.service';
 import {JwtService} from "@nestjs/jwt";
 import {Response, Request} from 'express';
@@ -7,6 +7,10 @@ import { CreateUserDto } from '../../dtos/CreateUser.dto';
 
 @Controller('api/users')
 export class UsersController {
+
+    private readonly logger = new Logger(UsersController.name)
+
+
     constructor(
         private readonly usersService: UsersService,
         private jwtService: JwtService
@@ -32,27 +36,38 @@ export class UsersController {
     async login(
         @Body('email') email: string,
         @Body('password') password: string,
-        @Res({passthrough: true}) response: Response
-    ) {
-        const user = await this.usersService.findOne(email);
-
-        if (!user) {
-            throw new BadRequestException('invalid credentials');
-        }
-
-        if (!await bcrypt.compare(password, user.password)) {
-            throw new BadRequestException('invalid credentials');
-        }
-
-        const jwt = await this.jwtService.signAsync({id: user.id});
-
-        response.cookie('jwt', jwt, {httpOnly: true});
-
-        response.status(200).json({
+        @Res({ passthrough: true }) response: Response,
+      ) {
+        try {
+          this.logger.log("Connexion de l'utilisateur", { email });
+          
+          const user = await this.usersService.findOne(email);
+      
+          if (!user) {
+            this.logger.error("Identifiants invalides", { email });
+            throw new BadRequestException('Identifiants invalides');
+          }
+      
+          const passwordMatch = await bcrypt.compare(password, user.password);
+      
+          if (!passwordMatch) {
+            this.logger.error("Identifiants invalides", { email });
+            throw new BadRequestException('Identifiants invalides');
+          }
+      
+          const jwt = await this.jwtService.signAsync({ id: user.id });
+      
+          response.cookie('jwt', jwt, { httpOnly: true });
+      
+          response.status(200).json({
             idToken: jwt,
-            expiresIn: 3600
-        })
-    }
+            expiresIn: 3600,
+          });
+        } catch (error) {
+          this.logger.error("Erreur lors de la connexion de l'utilisateur", { email, error });
+          throw error;
+        }
+      }
 
     @Get('user')
     async user(@Req() request: Request) {

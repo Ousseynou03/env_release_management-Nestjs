@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Param, Post, Put } from '@nestjs/common';
-import { TesteurService } from 'src/testeur/service/testeur/testeur.service';
-import { Testeur } from 'src/typeorm/entities/testingManage/testeur.entity';
+import { TesteurService } from '../../../testeur/service/testeur/testeur.service';
+import { Testeur } from '../../../typeorm/entities/testingManage/testeur.entity';
 
 @Controller('testeurManager')
 export class TesteurController {

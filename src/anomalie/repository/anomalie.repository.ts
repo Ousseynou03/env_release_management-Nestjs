@@ -1,4 +1,4 @@
-import { Anomalie } from "src/typeorm/entities/testingManage/anomalie.entity";
+import { Anomalie } from "../../typeorm/entities/testingManage/anomalie.entity";
 import { EntityRepository, Repository } from "typeorm";
 
 @EntityRepository(Anomalie)

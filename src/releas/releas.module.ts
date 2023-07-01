@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ReleasService } from './service/releas/releas.service';
-import { Releas } from 'src/typeorm/entities/testingManage/releas.entity';
+import { Releas } from '../typeorm/entities/testingManage/releas.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReleasController } from './controller/releas/releas.controller';
 

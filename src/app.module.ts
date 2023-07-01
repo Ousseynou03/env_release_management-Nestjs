@@ -30,7 +30,8 @@ import { TicketModule } from './ticket/ticket.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
@@ -40,6 +41,7 @@ import { TicketModule } from './ticket/ticket.module';
       entities: [Planning, Task, Activity, Indisponibility, CartographieDitw, FusionDatapfProgiciel, User,Anomalie, CasDeTest,ScenarioDeTest,Releas,Testeur,Ticket],
       synchronize: true,
     }),
+  }),
     PlanningsModule,
     TasksModule,
     ActivitiesModule,

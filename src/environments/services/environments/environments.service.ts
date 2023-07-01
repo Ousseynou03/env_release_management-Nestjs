@@ -9,6 +9,8 @@ import {
 } from '../../../utils/types';
 import { FusionDatapfProgiciel } from '../../../typeorm/entities/FusionDatapfProgiciel';
 import { CartographieDitw } from '../../../typeorm/entities/CartographieDitw';
+import { FusionDatapfProgicielRepository } from '../../../environments/repository/fusionDatapfProgiciel.repository';
+import { CartographieDitwRepository } from '../../../environments/repository/cartographieDitw.repository';
 
 @Injectable()
 export class EnvironmentsService {
@@ -18,9 +20,9 @@ export class EnvironmentsService {
 
     constructor(
         @InjectRepository(FusionDatapfProgiciel)
-        private fusionDatapfProgicielRepository: Repository<FusionDatapfProgiciel>,
+        private fusionDatapfProgicielRepository: FusionDatapfProgicielRepository,
         @InjectRepository(CartographieDitw)
-        private cartographieDitwRepository: Repository<CartographieDitw>
+        private cartographieDitwRepository: CartographieDitwRepository
     ) {}
 
 //    findFusionDatapfProgiciels() {

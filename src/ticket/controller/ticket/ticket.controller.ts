@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Param, Post, Put } from '@nestjs/common';
-import { TicketService } from 'src/ticket/service/ticket/ticket.service';
-import { Ticket } from 'src/typeorm/entities/testingManage/ticket.entity';
+import { TicketService } from '../../../ticket/service/ticket/ticket.service';
+import { Ticket } from '../../../typeorm/entities/testingManage/ticket.entity';
 
 @Controller('ticketManager')
 export class TicketController {

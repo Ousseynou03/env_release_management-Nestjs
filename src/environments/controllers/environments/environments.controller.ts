@@ -8,14 +8,13 @@ import {
     Post,
     Put,
 } from '@nestjs/common';
-import { EnvironmentsService } from 'src/environments/services/environments/environments.service';
+import { EnvironmentsService } from '../../../environments/services/environments/environments.service';
 import { CreateCartographieDitwDto } from '../../dtos/CreateCartographieDitw.dto';
 import { UpdateCartographieDitwDto } from '../../dtos/UpdateCartographieDitw.dto';
 import { CreateFusionDatapfProgicielDto } from '../../dtos/CreateFusionDatapfProgiciel.dto';
 import { UpdateFusionDatapfProgicielDto } from '../../dtos/UpdateFusionDatapfProgiciel.dto';
 
-import { FusionDatapfProgiciel } from '../../../typeorm/entities/FusionDatapfProgiciel';
-import { CartographieDitw } from '../../../typeorm/entities/CartographieDitw';
+
 
 @Controller('api/environments/')
 export class EnvironmentsController {

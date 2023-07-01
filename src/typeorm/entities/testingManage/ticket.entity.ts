@@ -4,7 +4,7 @@ import { Releas } from "./releas.entity";
 import { Anomalie } from "./anomalie.entity";
 import { CasDeTest } from "./casDeTest.entity";
 import { Testeur } from "./testeur.entity";
-import { Types } from "src/typeorm/enums/types.enums";
+import { Types } from "../../../typeorm/enums/types.enums";
 
 
 

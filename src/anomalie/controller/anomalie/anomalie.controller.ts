@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Param, Post, Put } from '@nestjs/common';
-import { AnomalieService } from 'src/anomalie/service/anomalie/anomalie.service';
-import { Anomalie } from 'src/typeorm/entities/testingManage/anomalie.entity';
+import { AnomalieService } from '../../../anomalie/service/anomalie/anomalie.service';
+import { Anomalie } from '../../../typeorm/entities/testingManage/anomalie.entity';
 
 @Controller('anomalieManager')
 export class AnomalieController {

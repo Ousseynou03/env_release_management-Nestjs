@@ -1,8 +1,8 @@
-import { Cloturee } from "src/typeorm/enums/cloturee.enum";
-import { Criticite } from "src/typeorm/enums/criticite.enum";
-import { EnCours } from "src/typeorm/enums/enCours.enum";
-import { Priorite } from "src/typeorm/enums/priorite.enum";
-import { Statut } from "src/typeorm/enums/statut.enum";
+import { Cloturee } from "../../../typeorm/enums/cloturee.enum";
+import { Criticite } from "../../../typeorm/enums/criticite.enum";
+import { EnCours } from "../../../typeorm/enums/enCours.enum";
+import { Priorite } from "../../../typeorm/enums/priorite.enum";
+import { Statut } from "../../../typeorm/enums/statut.enum";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Ticket } from "./ticket.entity";
 

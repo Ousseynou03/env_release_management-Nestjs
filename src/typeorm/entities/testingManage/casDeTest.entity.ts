@@ -1,4 +1,4 @@
-import { Resultat } from "src/typeorm/enums/resultat.enum";
+import { Resultat } from "../../../typeorm/enums/resultat.enum";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { ScenarioDeTest } from "./scenarioDeTest.entity";
 import { Ticket } from "./ticket.entity";

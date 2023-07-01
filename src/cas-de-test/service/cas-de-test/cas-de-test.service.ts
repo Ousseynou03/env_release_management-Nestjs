@@ -1,11 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
-import { CasDeTestRepository } from 'src/cas-de-test/repository/casDeTest.repository';
-import { CasDeTest } from 'src/typeorm/entities/testingManage/casDeTest.entity';
+import { CasDeTestRepository } from '../../../cas-de-test/repository/casDeTest.repository';
+import { CasDeTest } from '../../../typeorm/entities/testingManage/casDeTest.entity';
 import { DataSource } from 'typeorm';
 
 @Injectable()
 export class CasDeTestService {
+
+    private readonly logger = new Logger(CasDeTestService.name);
     constructor(@InjectRepository(CasDeTest) private casDeTestRepository : CasDeTestRepository,
     @InjectDataSource() private dataSource: DataSource) {}
 
@@ -17,11 +19,17 @@ export class CasDeTestService {
 
     //Méthode pour récupérer un cas de test sachant son ID
     async getCasDeTestById(refCasTest: number): Promise<CasDeTest> {
-        const casDeTest = await this.casDeTestRepository.findOneBy({refCasTest});
-        if (!casDeTest) {
-          throw new NotFoundException(`Cas de test with ID:${refCasTest} not found`);
+        try {
+          this.logger.log(`Fetching cas de test with ID ${refCasTest}...`);
+          const casDeTest = await this.casDeTestRepository.findOneBy({ refCasTest });
+          if (!casDeTest) {
+            throw new NotFoundException(`Cas de test with ID:${refCasTest} not found`);
+          }
+          return casDeTest;
+        } catch (error) {
+          this.logger.error(`Failed to fetch cas de test with ID ${refCasTest}.`, error);
+          throw error;
         }
-        return casDeTest;
       }
 
 

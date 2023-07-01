@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { jwtConfig } from 'src/config/jwt.config';
-import { User } from 'src/typeorm/entities/User';
+import { jwtConfig } from '../config/jwt.config';
+import { User } from '../typeorm/entities/User';
 import { UsersController } from './controllers/users/users.controller';
 import { JwtStrategy } from './jwt.strategy';
 import { UsersService } from './services/users/users.service';

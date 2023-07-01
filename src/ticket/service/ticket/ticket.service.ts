@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
-import { TicketRepository } from 'src/ticket/repository/ticket.repository';
-import { Ticket } from 'src/typeorm/entities/testingManage/ticket.entity';
+import { TicketRepository } from '../../../ticket/repository/ticket.repository';
+import { Ticket } from '../../../typeorm/entities/testingManage/ticket.entity';
 import { DataSource } from 'typeorm';
 
 @Injectable()

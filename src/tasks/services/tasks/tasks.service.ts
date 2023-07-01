@@ -4,13 +4,15 @@ import { Repository } from 'typeorm';
 import {CreateTaskParams, UpdatePlanningParams, UpdateTaskParams} from '../../../utils/types';
 import { Task } from '../../../typeorm/entities/Task';
 import { Planning } from '../../../typeorm/entities/Planning';
+import { PlanningRepository } from '../../../plannings/repository/planning.repository';
+import { TaskRepository } from '../../../tasks/repository/task.repository';
 @Injectable()
 export class TasksService {
 private readonly logger = new Logger(TasksService.name)
 
   constructor(
-    @InjectRepository(Task) private taskRepository: Repository<Task>,
-    @InjectRepository(Planning) private planningRepository: Repository<Planning>,
+    @InjectRepository(Task) private taskRepository: TaskRepository,
+    @InjectRepository(Planning) private planningRepository: PlanningRepository
   ) {}
 
   findTasks() {

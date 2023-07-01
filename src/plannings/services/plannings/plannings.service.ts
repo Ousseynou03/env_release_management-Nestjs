@@ -6,12 +6,13 @@ import {
   UpdatePlanningParams,
 } from '../../../utils/types';
 import { Planning } from '../../../typeorm/entities/Planning';
+import { PlanningRepository } from '../../../plannings/repository/planning.repository';
 
 @Injectable()
 export class PlanningsService {
   constructor(
     @InjectRepository(Planning)
-    private planningRepository: Repository<Planning>,
+    private planningRepository: PlanningRepository,
   ) {}
 
   findPlannings() {

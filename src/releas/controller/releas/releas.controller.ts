@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Param, Post, Put } from '@nestjs/common';
-import { ReleasService } from 'src/releas/service/releas/releas.service';
-import { Releas } from 'src/typeorm/entities/testingManage/releas.entity';
+import { ReleasService } from '../../../releas/service/releas/releas.service';
+import { Releas } from '../../../typeorm/entities/testingManage/releas.entity';
 
 @Controller('releaseManager')
 export class ReleasController {

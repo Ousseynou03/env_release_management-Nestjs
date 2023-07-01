@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Param, Post, Put } from '@nestjs/common';
-import { ScenarioDeTestService } from 'src/scenario-de-test/service/scenario-de-test/scenario-de-test.service';
-import { ScenarioDeTest } from 'src/typeorm/entities/testingManage/scenarioDeTest.entity';
+import { ScenarioDeTestService } from '../../../scenario-de-test/service/scenario-de-test/scenario-de-test.service';
+import { ScenarioDeTest } from '../../../typeorm/entities/testingManage/scenarioDeTest.entity';
 
 @Controller('scenarioManager')
 export class ScenarioDeTestController {
