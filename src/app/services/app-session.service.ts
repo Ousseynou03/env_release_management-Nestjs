@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from './base.service';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {BASE_URL, environment} from '../../environments/environment';
 import {Planning} from '../models/planning-model';
 import {Task} from '../models/task';
 import {Activity} from '../models/activity-model';
@@ -182,51 +182,59 @@ export class AppSessionService extends BaseService {
 
   //Testing Manage
 
-  postTesteur(data : any){
-    return this._http.post<any>("http://localhost:3000/testeurManager", data);
-  }
 
+postTesteur(data: any) {
+  const url = `${BASE_URL}/testeurManager`;
+  return this._http.post<any>(url, data);
+}
 
+getTesteur(id: number) {
+  const url = `${BASE_URL}/testeurManager/${id}`;
+  return this.getRequest(url);
+}
 
-  getTesteur(id:number){
-    return this.getRequest("http://localhost:3000/testeurManager/"+id);
-  }
+getAllTesteur() {
+  const url = `${BASE_URL}/testeurManager`;
+  return this.getRequest(url);
+}
 
-  getAllTesteur(){
-    return this.getRequest("http://localhost:3000/testeurManager");
-  }
+putTesteur(data: any, id: number) {
+  const url = `${BASE_URL}/testeurManager/${id}`;
+  return this._http.put<any>(url, data);
+}
 
-  putTesteur(data : any, id : number){
-    return this._http.put<any>("http://localhost:3000/testeurManager/"+id, data);
-  }
-
-  deleteTesteur(id : number){
-    return this._http.delete<any>("http://localhost:3000/testeurManager/"+id);
-  }
+deleteTesteur(id: number) {
+  const url = `${BASE_URL}/testeurManager/${id}`;
+  return this._http.delete<any>(url);
+}
 
 
   //Release Manage
 
+postRelease(data: any) {
+  const url = `${BASE_URL}/releaseManager`;
+  return this._http.post<any>(url, data);
+}
 
-  postRelease(data : any){
-    return this._http.post<any>("http://localhost:3000/releaseManager", data);
-  }
+getAllRelease() {
+  const url = `${BASE_URL}/releaseManager`;
+  return this._http.get<any>(url);
+}
 
-  getAllRelease(){
-    return this._http.get<any>("http://localhost:3000/releaseManager");
-  }
+putRelease(data: any, id: number) {
+  const url = `${BASE_URL}/releaseManager/${id}`;
+  return this._http.put<any>(url, data);
+}
 
-  putRelease(data : any, id : number){
-    return this._http.put<any>("http://localhost:3000/releaseManager/"+id, data);
-  }
+getRelease(id: number) {
+  const url = `${BASE_URL}/releaseManager/${id}`;
+  return this._http.get<any>(url);
+}
 
-  getRelease(id : number){
-    return this._http.get<any>("http://localhost:3000/releaseManager/"+id);
-  }
-
-  deleteRelease(id : number){
-    return this._http.delete<any>("http://localhost:3000/releaseManager/"+id);
-  }
+deleteRelease(id: number) {
+  const url = `${BASE_URL}/releaseManager/${id}`;
+  return this._http.delete<any>(url);
+}
 
   identifiantRelease(){
     return localStorage.getItem('id');
@@ -234,115 +242,141 @@ export class AppSessionService extends BaseService {
 
   //Anomalie Manage
 
-  postAnomalie(data : any){
-    return this._http.post<any>("http://localhost:3000/anomalieManager", data);
+  postAnomalie(data: any) {
+    const url = `${BASE_URL}/anomalieManager`;
+    return this._http.post<any>(url, data);
   }
-
-  getAllAnomalie(){
-    return this._http.get<any>("http://localhost:3000/anomalieManager");
+  
+  getAllAnomalie() {
+    const url = `${BASE_URL}/anomalieManager`;
+    return this._http.get<any>(url);
   }
-
-  putAnomalie(data : any, id : number){
-    return this._http.put<any>("http://localhost:3000/anomalieManager/"+id, data);
+  
+  putAnomalie(data: any, id: number) {
+    const url = `${BASE_URL}/anomalieManager/${id}`;
+    return this._http.put<any>(url, data);
   }
-
-  getAnomalie(id : number){
-    return this._http.get<any>("http://localhost:3000/anomalieManager/"+id);
+  
+  getAnomalie(id: number) {
+    const url = `${BASE_URL}/anomalieManager/${id}`;
+    return this._http.get<any>(url);
   }
-
-  deleteAnomalie(id : number){
-    return this._http.delete<any>("http://localhost:3000/anomalieManager/"+id);
+  
+  deleteAnomalie(id: number) {
+    const url = `${BASE_URL}/anomalieManager/${id}`;
+    return this._http.delete<any>(url);
   }
+  
 
   //Ticket Manage
 
-  postTicket(data : any){
-    return this._http.post<any>("http://localhost:3000/ticketManager", data);
+  postTicket(data: any) {
+    const url = `${BASE_URL}/ticketManager`;
+    return this._http.post<any>(url, data);
   }
-
-  getAllTicket(){
-    return this._http.get<any>("http://localhost:3000/ticketManager");
+  
+  getAllTicket() {
+    const url = `${BASE_URL}/ticketManager`;
+    return this._http.get<any>(url);
   }
-
-  getVisionTicket(id: number){
-    return this._http.get<any>("http://localhost:3000/ticketManager/visionsTicket/"+id);
+  
+  getVisionTicket(id: number) {
+    const url = `${BASE_URL}/ticketManager/visionsTicket/${id}`;
+    return this._http.get<any>(url);
   }
-
-  getVisionBloquante(id: number){
-    return this._http.get<any>("http://localhost:3000/ticketManager/visionsBloquante/"+id);
+  
+  getVisionBloquante(id: number) {
+    const url = `${BASE_URL}/ticketManager/visionsBloquante/${id}`;
+    return this._http.get<any>(url);
   }
-
-  getVisionMajeuret(id: number){
-    return this._http.get<any>("http://localhost:3000/ticketManager/visionsMajeure/"+id);
+  
+  getVisionMajeuret(id: number) {
+    const url = `${BASE_URL}/ticketManager/visionsMajeure/${id}`;
+    return this._http.get<any>(url);
   }
-
-  getVisionMineure(id: number){
-    return this._http.get<any>("http://localhost:3000/ticketManager/visionsMineure/"+id);
+  
+  getVisionMineure(id: number) {
+    const url = `${BASE_URL}/ticketManager/visionsMineure/${id}`;
+    return this._http.get<any>(url);
   }
-
-  getAllTicketForRelease(id:number){
-    return this._http.get<any>("http://localhost:3000/ticketManager/ticketRelease/"+id);
+  
+  getAllTicketForRelease(id: number) {
+    const url = `${BASE_URL}/ticketManager/ticketRelease/${id}`;
+    return this._http.get<any>(url);
   }
-
-  getTicket(id:number){
-    return this._http.get<any>("http://localhost:3000/ticketManager/"+id);
+  
+  getTicket(id: number) {
+    const url = `${BASE_URL}/ticketManager/${id}`;
+    return this._http.get<any>(url);
   }
-
-  putTicket(data : any, id : number){
-    return this._http.put<any>("http://localhost:3000/ticketManager/"+id, data);
+  
+  putTicket(data: any, id: number) {
+    const url = `${BASE_URL}/ticketManager/${id}`;
+    return this._http.put<any>(url, data);
   }
-
-  deleteTicket(id : number){
-    return this._http.delete<any>("http://localhost:3000/ticketManager/"+id);
+  
+  deleteTicket(id: number) {
+    const url = `${BASE_URL}/ticketManager/${id}`;
+    return this._http.delete<any>(url);
   }
 
 
   //Cas De Test Manage
 
-  postCasTest(data : any){
-    return this._http.post<any>("http://localhost:3000/casTestManager", data);
-  }
+ 
+postCasTest(data: any) {
+  const url = `${BASE_URL}/casTestManager`;
+  return this._http.post<any>(url, data);
+}
 
-  getAllCasTest(){
-    return this._http.get<any>("http://localhost:3000/casTestManager");
-  }
+getAllCasTest() {
+  const url = `${BASE_URL}/casTestManager`;
+  return this._http.get<any>(url);
+}
 
-  getCasTest(id : number){
-    return this._http.get<any>("http://localhost:3000/casTestManager/"+id);
-  }
+getCasTest(id: number) {
+  const url = `${BASE_URL}/casTestManager/${id}`;
+  return this._http.get<any>(url);
+}
 
-  putCasTest(data : any, id : number){
-    return this._http.put<any>("http://localhost:3000/casTestManager/"+id, data);
-  }
+putCasTest(data: any, id: number) {
+  const url = `${BASE_URL}/casTestManager/${id}`;
+  return this._http.put<any>(url, data);
+}
 
-  deleteCasTest(id : number){
-    return this._http.delete<any>("http://localhost:3000/casTestManager/"+id);
-  }
+deleteCasTest(id: number) {
+  const url = `${BASE_URL}/casTestManager/${id}`;
+  return this._http.delete<any>(url);
+}
 
-  getVisionCasTest(id: number){
-    return this._http.get<any>("http://localhost:3000/casTestManager/visionCasTest/"+id);
-  }
-
+getVisionCasTest(id: number) {
+  const url = `${BASE_URL}/casTestManager/visionCasTest/${id}`;
+  return this._http.get<any>(url);
+}
 
   //Scenario de test Manage
-
-  postScenario(data : any){
-    return this._http.post<any>("http://localhost:3000/scenarioManager", data);
+  postScenario(data: any) {
+    const url = `${BASE_URL}/scenarioManager`;
+    return this._http.post<any>(url, data);
   }
-
-  getAllScenario(){
-    return this._http.get<any>("http://localhost:3000/scenarioManager");
+  
+  getAllScenario() {
+    const url = `${BASE_URL}/scenarioManager`;
+    return this._http.get<any>(url);
   }
-
-  getAllScenarioForCasTest(id: number){
-    return this._http.get<any>("http://localhost:3000/scenarioManager/casTest/"+id);
+  
+  getAllScenarioForCasTest(id: number) {
+    const url = `${BASE_URL}/scenarioManager/casTest/${id}`;
+    return this._http.get<any>(url);
   }
-
-  putScenario(data : any, id : number){
-    return this._http.put<any>("http://localhost:3000/scenarioManager/"+id, data);
+  
+  putScenario(data: any, id: number) {
+    const url = `${BASE_URL}/scenarioManager/${id}`;
+    return this._http.put<any>(url, data);
   }
-
-  deleteScenario(id : number){
-    return this._http.delete<any>("http://localhost:3000/scenarioManager/"+id);
+  
+  deleteScenario(id: number) {
+    const url = `${BASE_URL}/scenarioManager/${id}`;
+    return this._http.delete<any>(url);
   }
 }

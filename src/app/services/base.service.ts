@@ -62,7 +62,7 @@ export class BaseService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-type': 'application/json',
-      'X-API-KEY': environment.X_API_KEY
+      //'X-API-KEY': environment.X_API_KEY
     });
 
     if (additionalHeaders) {
