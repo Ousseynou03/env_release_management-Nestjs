@@ -30,6 +30,7 @@
               "src/assets/css/demo.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
               "src/styles.css"
+        
 
 
             ],
@@ -39,6 +40,8 @@
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/chartist/dist/chartist.js",
               "./node_modules/hammerjs/hammer.min.js"
+            
+             
             
             ]
           },
