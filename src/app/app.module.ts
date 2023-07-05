@@ -50,7 +50,7 @@ import { ScenarioTestDialogComponent } from './perimetre/detail/dialogs/scenario
 import { TicketDialogComponent } from './perimetre/detail/dialogs/ticket/ticket-dialog/ticket-dialog.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { BrowserModule } from '@angular/platform-browser';
-import {ChartModule} from 'primeng/chart';
+//import {ChartModule} from 'primeng/chart';
 import {StepsModule} from 'primeng/steps';
 import { TabViewModule } from 'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
