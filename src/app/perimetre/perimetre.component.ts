@@ -57,18 +57,38 @@ export class PerimetreComponent implements OnInit {
   }
 
 
-  deleteRelease(refRelease: number){
-    this.app_service.deleteRelease(refRelease)
-    .subscribe({
-      next:(value) =>{
-          alert("Release Supprimer avec Succès");
-          this.getAllPerimetre();
-      },
-      error(err) {
-          alert("Impossible de Supprimer cette Release");
-      },
-    })
+  deleteRelease(refRelease: number) {
+    Swal.fire({
+      title: 'Voulez-vous vraiment supprimer cette release ?',
+      text: 'La release sera définitivement supprimée!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer!'
+    }).then((result) => {
+      if (result.value) {
+        this.app_service.deleteRelease(refRelease).subscribe(
+          () => {
+            Swal.fire(
+              'Supprimée!',
+              'La release a été supprimée avec succès.',
+              'success'
+            );
+            this.getAllPerimetre();
+          },
+          (error) => {
+            Swal.fire(
+              'Erreur!',
+              'Impossible de supprimer cette release.',
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
+  
 
   editDialog(row : any) {
     this.dialog.open(DialogEditComponent, {

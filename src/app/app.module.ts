@@ -94,7 +94,15 @@ import { ToastModule } from 'primeng/toast';
         MatDatepickerModule,
         MatSelectModule,
         ChartModule,
-       // StepsModule
+        StepsModule,
+        TabViewModule,
+        ButtonModule,
+        CardModule,
+        DropdownModule,
+        InputTextModule,
+        InputMaskModule,
+        CheckboxModule,
+        ToastModule
 
        
 
