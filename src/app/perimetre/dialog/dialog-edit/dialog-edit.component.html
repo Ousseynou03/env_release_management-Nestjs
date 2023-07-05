@@ -1,40 +1,34 @@
-<h2 mat-dialog-title>Modifier Release</h2>
+<h2 mat-dialog-title style="color: rgb(1, 111, 182);">Modifier Release</h2>
 
 <mat-dialog-content class="mat-typography">
-    <form action="" [formGroup]="FormGroup1">
+  <form action="" [formGroup]="FormGroup1">
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Nom Release</mat-label>
-        <input matInput placeholder="Projet 1" formControlName="nomRelease" required>
-      </mat-form-field>
+    <div class="form-group">
+      <label for="nomRelease">Nom Release</label>
+      <input type="text" class="form-control" id="nomRelease" placeholder="Projet 1" formControlName="nomRelease" required>
+    </div>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Date Livraison</mat-label>
-          <input matInput [matDatepicker]="picker1" formControlName="dateLivraison" required>
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-    
-        <mat-form-field class="example-full-width">
-            <mat-label>Date Prévision</mat-label>
-            <input matInput [matDatepicker]="picker2" formControlName="datePrevision" required>
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
+    <div class="form-group">
+      <label for="dateLivraison">Date Livraison</label>
+      <input type="text" class="form-control" id="dateLivraison" placeholder="MM/DD/YYYY" formControlName="dateLivraison" required>
+    </div>
 
-        <mat-form-field class="example-full-width">
-            <mat-label>Date Réelle</mat-label>
-            <input matInput [matDatepicker]="picker3" formControlName="dateReelle" required>
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-            <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>
-    </form>
+    <div class="form-group">
+      <label for="datePrevision">Date Prévision</label>
+      <input type="text" class="form-control" id="datePrevision" placeholder="MM/DD/YYYY" formControlName="datePrevision" required>
+    </div>
 
+    <div class="form-group">
+      <label for="dateReelle">Date Réelle</label>
+      <input type="text" class="form-control" id="dateReelle" placeholder="MM/DD/YYYY" formControlName="dateReelle" required>
+    </div>
+
+  </form>
 </mat-dialog-content>
+
 <mat-dialog-actions [align]="'end'">
-  <button mat-fab extended  color="accent" mat-dialog-close>Annuler</button>
-  <button mat-fab extended  color="primary"  [mat-dialog-close]="true" cdkFocusInitial (click)="updateRelease()">Modifier</button>
+  <div class="step-buttons">
+    <button class="btn btn-secondary" color="primary" ria-label="Example icon-button with share icon" mat-dialog-close>Annuler</button>
+    <button class="btn btn-primary"  style="margin-left: 20px;color: rgb(1, 111, 182);"[mat-dialog-close]="true" cdkFocusInitial (click)="updateRelease()">Modifier</button>
+  </div>
 </mat-dialog-actions>
