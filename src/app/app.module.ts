@@ -61,6 +61,9 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToastModule } from 'primeng/toast';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -102,7 +105,8 @@ import { ToastModule } from 'primeng/toast';
         InputTextModule,
         InputMaskModule,
         CheckboxModule,
-        ToastModule
+        ToastModule,
+        
        
 
 
