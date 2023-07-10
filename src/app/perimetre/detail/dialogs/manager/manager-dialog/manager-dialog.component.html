@@ -13,7 +13,7 @@
                                 <div class="carousel-item active">
                                     <div class="card mb-3">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Ticket</h5>
+                                            <h3 class="mb-0" style="color: rgb(1, 111, 182);">Ticket</h3>
                                         </div>
                                         <div class="card-body">
                                             <form [formGroup]="FormGroup2" class="mt-4">
@@ -49,14 +49,14 @@
                                 <div class="carousel-item">
                                     <div class="card mb-3">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Test</h5>
+                                            <h3 class="mb-0" style="color: rgb(1, 111, 182);">Cas De Test</h3>
                                         </div>
                                         <div class="card-body">
                                             <form [formGroup]="FormGroup3" class="mt-3">
                                               
 
                             <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Resultat</mat-label>
+                                <mat-label >Resultat</mat-label>
                                 <mat-select formControlName="resultat">
                                   <mat-option value=""></mat-option>
                                   <mat-option value="En_Cours">En Cours</mat-option>
@@ -77,7 +77,7 @@
                                 <div class="carousel-item">
                                     <div class="card mb-3">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Anomalie</h5>
+                                            <h3 class="mb-0" style="color: rgb(1, 111, 182);">Anomalie</h3>
                                         </div>
                                         <div class="card-body">
                                             <form [formGroup]="FormGroup5" class="mt-4">
@@ -142,11 +142,11 @@
                             </div>
                             <div class="toolbar" style="background-color: white;">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-primary mr-2" (click)="goToPreviousStep()">
-                                        <i class="fas fa-arrow-left"></i> Annuler
+                                    <button class="btn btn-secondary" color="primary" ria-label="Example icon-button with share icon" mat-dialog-close>
+                                        Annuler
                                     </button>
-                                    <button class="btn btn-accent" (click)="updatePerimetreManager()">
-                                        Envoyer <i class="fas fa-check"></i>
+                                    <button class="btn btn-primary" style="margin-left: 20px;color: rgb(1, 111, 182);" (click)="updatePerimetreManager()">
+                                        Modifier
                                     </button>
                                 </div>
                             </div>
