@@ -2,57 +2,58 @@
     <div class="page_box p-3 mt-2">Indicateurs Qualifications</div>
     <div class="page_content shadow p-3 position-relative">
         <div class="page_content-data position-absolute text-center"></div>
-          
-        
+
         <div class="container">
             <div class="mt-2">
-                <mat-stepper [linear]="isLinear"  #stepper> 
+                <div class="row">
+                    <div class="col">
+                        <div id="carouselSteps" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
 
-                    <mat-step [stepControl]="FormGroup2" optional>
-    
-                        <ng-template matStepLabel>Ticket</ng-template>
-                        <form [formGroup]="FormGroup2" class="mt-4">
+                                <div class="carousel-item active">
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Ticket</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form [formGroup]="FormGroup2" class="mt-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Titre Ticket</mat-label>
+                                                    <input matInput placeholder="Titre 1" formControlName="titre">
+                                                </mat-form-field>
+                    
+                                                <mat-form-field appearance="fill" class="example-full-width">
+                                                    <mat-label>Type</mat-label>
+                                                    <mat-select formControlName="type">
+                                                      <mat-option value="ANOMALIE">Anomalie</mat-option>
+                                                      <mat-option value="EVOLUTION">Evolution</mat-option>
+                                                      <mat-option value="INCIDENT">Incident</mat-option>
+                                                      <mat-option value="RECIT">Recit</mat-option>
+                                                      <mat-option value="HORS_RELEASE">Hors Release</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                    
+                    
+                                                <mat-form-field appearance="fill" class="example-full-width">
+                                                    <mat-label>Testeur</mat-label>
+                                                    <mat-select formControlName="testeur" required>
+                                                      <mat-option value=""></mat-option>
+                                                      <mat-option *ngFor="let testeurs of listTesteur" [value]="testeurs">{{testeurs.prenom}} {{testeurs.nom}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Titre Ticket</mat-label>
-                                <input matInput placeholder="Titre 1" formControlName="titre">
-                            </mat-form-field>
-
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Type</mat-label>
-                                <mat-select formControlName="type">
-                                  <mat-option value="ANOMALIE">Anomalie</mat-option>
-                                  <mat-option value="EVOLUTION">Evolution</mat-option>
-                                  <mat-option value="INCIDENT">Incident</mat-option>
-                                  <mat-option value="RECIT">Recit</mat-option>
-                                  <mat-option value="HORS_RELEASE">Hors Release</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Testeur</mat-label>
-                                <mat-select formControlName="testeur" required>
-                                  <mat-option value=""></mat-option>
-                                  <mat-option *ngFor="let testeurs of listTesteur" [value]="testeurs">{{testeurs.prenom}} {{testeurs.nom}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </form>
-                        <mat-toolbar style="background-color: white;">
-                            <span class="example-spacer"></span>
-                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" mat-dialog-close>
-                                <mat-icon>cancel</mat-icon>Fermer
-                            </button> | 
-                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" matStepperNext>
-                                Suivant<mat-icon>keyboard_arrow_right</mat-icon>
-                            </button>
-                        </mat-toolbar>
-                    </mat-step>
-        
-                    <mat-step [stepControl]="FormGroup3" optional>
-                        <ng-template matStepLabel>Test</ng-template>
-                        <form [formGroup]="FormGroup3" class="mt-3">
-                            <h2 style="text-align: center;">Cas De Test</h2>
+                                <div class="carousel-item">
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Test</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form [formGroup]="FormGroup3" class="mt-3">
+                                              
 
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Resultat</mat-label>
@@ -68,25 +69,19 @@
                                 </mat-select>
                             </mat-form-field>
                             
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        </form>
-                        <mat-toolbar style="background-color: white;">
-                            <span class="example-spacer"></span>
-                            <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" matStepperPrevious>
-                                <mat-icon>keyboard_arrow_left</mat-icon>Retour
-                            </button> | 
-                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" matStepperNext>
-                                Suivant<mat-icon>keyboard_arrow_right</mat-icon>
-                            </button>
-                        </mat-toolbar>
-                    </mat-step>
-        
-                   
-        
-                    <mat-step [stepControl]="FormGroup5" optional>
-                        <ng-template matStepLabel>Anomalie</ng-template>
-                        <form [formGroup]="FormGroup5" class="mt-4">
-
+                                <div class="carousel-item">
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Anomalie</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form [formGroup]="FormGroup5" class="mt-4">
+                                                
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Criticité</mat-label>
                                 <mat-select formControlName="criticite">
@@ -138,23 +133,28 @@
                                   <mat-option value="ProblemeDocumentaire">Problème Documentaire</mat-option>
                                   <mat-option value="ArbitrageProjetEvolution">Arbitrage Projet Evolution</mat-option>
                                 </mat-select>
-                            </mat-form-field>
-
-                        </form>
-                        <mat-toolbar style="background-color: white;"> 
-                            <span class="example-spacer"></span>
-                            <button  mat-fab extended  color="primary" aria-label="Example icon-button with share icon" matStepperPrevious>
-                                <mat-icon>keyboard_arrow_left</mat-icon>Retour
-                            </button> | 
-                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="updatePerimetreManager()">
-                                Envoyer<mat-icon>check</mat-icon>
-                            </button>
-                        </mat-toolbar>
-                    </mat-step>
-                    
-                </mat-stepper>  
+                            </mat-form-field>->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="toolbar" style="background-color: white;">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary mr-2" (click)="goToPreviousStep()">
+                                        <i class="fas fa-arrow-left"></i> Annuler
+                                    </button>
+                                    <button class="btn btn-accent" (click)="updatePerimetreManager()">
+                                        Envoyer <i class="fas fa-check"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
 </div>

@@ -4,7 +4,7 @@
 }
 
 table {
-    width: 100%;
+    width: 50%;
 }
   
 .mat-mdc-form-field {
@@ -18,5 +18,6 @@ td, th {
 
 .mat-mdc-form-field {
     font-size: 14px;
-    width: 100%;
+    width: 50%;
 }
+
