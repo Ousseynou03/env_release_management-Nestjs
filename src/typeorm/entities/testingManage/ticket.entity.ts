@@ -27,12 +27,12 @@ export class Ticket {
     testeur: Testeur;
 
   //Release
-  @ManyToOne(() => Releas, (releas) => releas.tickets, {eager: true})
+  @ManyToOne(() => Releas, (releas) => releas.tickets, { eager: true, onDelete: "CASCADE" })
   @JoinColumn([
-    { name: "release_ref_release", referencedColumnName: "refRelease"},
+    { name: "release_ref_release", referencedColumnName: "refRelease" },
   ])
   release: Releas;
-
+  
 
   //Anomalie
   @ManyToOne(() => Anomalie, (anomalie) => anomalie.ticket, {eager: true})
