@@ -37,7 +37,7 @@ import { TicketModule } from './ticket/ticket.module';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'env_releases',
+      database: 'env_release_management',
       entities: [Planning, Task, Activity, Indisponibility, CartographieDitw, FusionDatapfProgiciel, User,Anomalie, CasDeTest,ScenarioDeTest,Releas,Testeur,Ticket],
       synchronize: true,
     }),
