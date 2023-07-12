@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   X_API_KEY: undefined,
-   SRV_URL: 'http://localhost:3000/api',
+   SRV_URL: 'http://51.77.132.116:3002/api',
  
 };
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://51.77.132.116:3002";
