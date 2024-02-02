@@ -36,7 +36,7 @@ import { TicketModule } from './ticket/ticket.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'mysqlpass',
+      password: '',
       database: 'env_release_management',
       entities: [Planning, Task, Activity, Indisponibility, CartographieDitw, FusionDatapfProgiciel, User,Anomalie, CasDeTest,ScenarioDeTest,Releas,Testeur,Ticket],
       synchronize: true,
